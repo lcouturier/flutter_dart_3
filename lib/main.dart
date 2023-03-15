@@ -13,7 +13,7 @@ void main(List<String> arguments) {
       _ => 'others'
   };
 
-  print(status);
+  print(label);
 
   // const socialAnxietyLevel = 8;
 
