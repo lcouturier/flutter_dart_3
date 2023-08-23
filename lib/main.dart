@@ -2,43 +2,37 @@ import 'dart:math';
 
 // ignore_for_file: avoid_print
 
-enum CardStatus { active,inactive, none, issued, blocked }
+enum CardStatus {
+  active,
+  inactive,
+  none,
+  issued,
+  blocked,
+}
+
+typedef AddThree = int Function(int, int, int);
 
 void main(List<String> arguments) {
-  var status = CardStatus.blocked;
-  final label = switch(status) {
-      CardStatus.none => 'none',
-      CardStatus.active => 'active',
-      CardStatus.blocked || CardStatus.issued => 'blocked',
-      _ => 'others'
+  final d = <CardStatus, int>{
+    CardStatus.active: 10,
+    CardStatus.inactive: 20,
+    CardStatus.none: 30,
+    CardStatus.issued: 40,
+    CardStatus.blocked: 50,
   };
 
-  print(label);
-
-  // const socialAnxietyLevel = 8;
-
-  // final reaction = switch(socialAnxietyLevel) {
-  //     0 => 'Cool and collected',
-  //     1 || 2 || 3 => 'Nervous but trying to stay calm',
-  //     >= 4 && <=6 => 'Starting to panic',
-  //     7 || 8 || 9 => 'Feeling overwhelmed and frozen',
-  //     _ => 'Unable to function due to extreme anxiety'
-  // };
-
-  // print(reaction);   
+  final result = d.getOrDefault(CardStatus.inactive, () => 0);
+  print(result);
 }
 
 (double, double) geoLocation(String name) {
   if (name == 'Nairobi') {
-    return (-1.2921, 36.8219);  
+    return (-1.2921, 36.8219);
   }
-  return (0.0, 0.0);  
+  return (0.0, 0.0);
 }
 
-
-
-sealed class Shape {
-}
+sealed class Shape {}
 
 class Square implements Shape {
   final double length;
@@ -55,4 +49,18 @@ double calculateArea(Shape shape) {
     Square(length: var l) => l * l,
     Circle(radius: var r) => pi * r * r
   };
+}
+
+extension on int Function(int, int) {
+  int Function(int) curry(x) => (y) => this(x, y);
+}
+
+extension on int Function(int, int, int) {
+  int Function(int, int) curry(x) => (y, z) => this(x, y, z);
+}
+
+extension<K, V> on Map<K, V> {
+  (bool, V) getOrDefault(K key, V Function() defaultValue) {
+    return containsKey(key) ? (true, this[key]!) : (false, defaultValue());
+  }
 }
