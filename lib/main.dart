@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'dart:math';
 
 // ignore_for_file: avoid_print
@@ -12,17 +14,24 @@ enum CardStatus {
 
 typedef AddThree = int Function(int, int, int);
 
-void main(List<String> arguments) {
-  final d = <CardStatus, int>{
-    CardStatus.active: 10,
-    CardStatus.inactive: 20,
-    CardStatus.none: 30,
-    CardStatus.issued: 40,
-    CardStatus.blocked: 50,
-  };
+void main(List<String> arguments) {}
 
-  final result = d.getOrDefault(CardStatus.inactive, () => 0);
-  print(result);
+extension<T> on T {
+  Iterable<T> generate(T Function(T) operation) sync* {
+    var value = this;
+    yield value;
+    while (true) {
+      value = operation(value);
+      yield value;
+    }
+  }
+}
+
+extension<T> on Iterable<T> {
+  Iterable<T> mapIndexed(T Function(int, T) operation) {
+    int index = 0;
+    return map((e) => operation(index++, e));
+  }
 }
 
 (double, double) geoLocation(String name) {
