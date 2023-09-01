@@ -72,6 +72,11 @@ extension on int Function(int, int, int, int) {
   int Function(int, int, int) curry(x) => (y, z, u) => this(x, y, z, u);
 }
 
+extension on int Function(int, int, int, int, int) {
+  int Function(int, int, int, int) curry(x) =>
+      (y, z, u, v) => this(x, y, z, u, v);
+}
+
 extension<K, V> on Map<K, V> {
   (bool, V) getOrDefault(K key, V Function() defaultValue) {
     return containsKey(key) ? (true, this[key]!) : (false, defaultValue());
