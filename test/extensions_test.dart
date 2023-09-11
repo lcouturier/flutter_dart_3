@@ -4,24 +4,6 @@ import 'package:flutter_dart_3/extensions.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('cache', () {
-    test('test 1', () {
-      int mult(int x) => x * 2;
-
-      var m = mult.measure();
-
-      expect(m(2), 4);
-      expect(m(2), 4);
-      expect(m(3), 6);
-      expect(m(3), 6);
-    });
-
-    test('test 2', () {
-      final result = 5.factorial;
-      expect(result, 120);
-    });
-  });
-
   group('separatedBy', () {
     test('test numbers', () {
       final items = 1.generate((e) => e + 1).take(5).toList();

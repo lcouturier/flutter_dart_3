@@ -108,14 +108,21 @@ extension IterableExtensions<T> on Iterable<T> {
     return sum;
   }
 
-  Iterable<T> separatedBy(T separartor) {
-    return mapIndexed((index, item) => index == 0 ? [item] : [separartor, item]).expand((e) => e);
+  // indexed
+  Iterable<({int index, T element})> indexed() sync* {
+    int i = 0;
+    for (final e in this) {
+      yield (index: i++, element: e);
+    }
+  }
+
+  Iterable<T> separatedBy(T separator) {
+    return this.indexed().expand((e) => [if (e.index > 0) separator, e.element]);
   }
 
   // mapIndexed
   Iterable<R> mapIndexed<R>(R Function(int index, T item) operation) {
-    int index = 0;
-    return map((e) => operation(index++, e));
+    return indexed().map((e) => operation(e.index, e.element));
   }
 
   // wherzIndexed
