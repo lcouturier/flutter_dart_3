@@ -47,21 +47,17 @@ extension Function2Extensions<F, S, R> on R Function(F, S) {
 
 extension Function3Extensions<F, S, T, R> on R Function(F, S, T) {
   R Function(S, T) curry(F first) => (second, third) => this(first, second, third);
-
   R Function(S, T) operator <<(F first) => (second, third) => this(first, second, third);
-
   Function currying() => (F first) => (S second) => (T third) => this(first, second, third);
 }
 
 extension Function4Extensions<T1, T2, T3, T4, R> on R Function(T1, T2, T3, T4) {
   R Function(T2, T3, T4) curry(T1 t1) => (t2, t3, t4) => this(t1, t2, t3, t4);
-
   Function currying() => (T1 first) => (T2 second) => (T3 third) => (T4 fourth) => this(first, second, third, fourth);
 }
 
 extension Function5Extensions<T1, T2, T3, T4, T5, R> on R Function(T1, T2, T3, T4, T5) {
   R Function(T2, T3, T4, T5) curry(T1 t1) => (t2, t3, t4, t5) => this(t1, t2, t3, t4, t5);
-
   Function currying() =>
       (T1 first) => (T2 second) => (T3 third) => (T4 fourth) => (T5 fith) => this(first, second, third, fourth, fith);
 }
@@ -96,6 +92,8 @@ extension IterableIntExtensions on Iterable<num> {
   num get sum2 => _sum2(this);
 }
 
+typedef IndexedElement<T> = ({int index, T element});
+
 extension IterableExtensions<T> on Iterable<T> {
   Iterable<T> get tail => skip(1);
   T get head => first;
@@ -109,7 +107,7 @@ extension IterableExtensions<T> on Iterable<T> {
   }
 
   // indexed
-  Iterable<({int index, T element})> indexed() sync* {
+  Iterable<IndexedElement<T>> indexed() sync* {
     int i = 0;
     for (final e in this) {
       yield (index: i++, element: e);
@@ -125,10 +123,9 @@ extension IterableExtensions<T> on Iterable<T> {
     return indexed().map((e) => operation(e.index, e.element));
   }
 
-  // wherzIndexed
+  // whereIndexed
   Iterable<T> whereIndexed(bool Function(int index, T item) test) {
-    int index = 0;
-    return where((e) => test(index++, e));
+    return indexed().where((e) => test(e.index, e.element)).map((e) => e.element);
   }
 }
 
@@ -137,6 +134,7 @@ extension ExtensionInt on int {
   int Function(int) get _factorialCached => _factorial.cache();
 
   int get factorial => _factorialCached(this);
+  int opreator(int n) => _factorialCached(n);
 }
 
 extension DateTimeExtensions on DateTime {

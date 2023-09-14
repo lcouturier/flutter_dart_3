@@ -21,13 +21,6 @@ void main(List<String> arguments) {
   print(result);
 }
 
-extension<T> on Iterable<T> {
-  Iterable<T> mapIndexed(T Function(int, T) operation) {
-    int index = 0;
-    return map((e) => operation(index++, e));
-  }
-}
-
 (double, double) geoLocation(String name) {
   if (name == 'Nairobi') {
     return (-1.2921, 36.8219);
