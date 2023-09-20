@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter_dart_3/extensions.dart';
+import 'package:flutter_dart_3/extensions_iterable.dart';
+import 'package:flutter_dart_3/extensions_string.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -142,4 +144,158 @@ void main() {
       expect(result, 55);
     });
   });
+
+  group('iterable split', () {
+    test('test 1', () {
+      final result = [1, 2, 3, 4, 5, 6, 7, 8, 9].split(3);
+      expect(result.length, 3);
+      expect(result, [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+      ]);
+    });
+
+    test('test 2', () {
+      final result = [1, 2, 3, 4, 5, 6, 7, 8, 9].split(4);
+      expect(result.length, 3);
+      expect(result, [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9]
+      ]);
+    });
+
+    test('test 3', () {
+      final result = [1, 2, 3, 4, 5, 6, 7, 8, 9].split(5);
+      expect(result.length, 2);
+      expect(result, [
+        [1, 2, 3, 4, 5],
+        [6, 7, 8, 9]
+      ]);
+    });
+
+    test('test 4', () sync* {
+      final iterable = [1, 2, 3, 4];
+      expect(iterable.split(-1), throwsAssertionError);
+    });
+
+    test('test 5', () sync* {
+      final iterable = [1, 2, 3, 4];
+      expect(iterable.split(0), throwsAssertionError);
+    });
+
+    test('test 6', () {
+      final result = [1, 2, 3, 4].split(4);
+      expect(result.length, 1);
+      expect(result, [
+        [1, 2, 3, 4],
+      ]);
+    });
+  });
+
+  group('removeDigits', () {
+    test('test 1', () {
+      final result = 'abc123'.removeDigits();
+      expect(result, 'abc');
+    });
+
+    test('test 2', () {
+      final result = 'abc'.removeDigits();
+      expect(result, 'abc');
+    });
+
+    test('test 3', () {
+      final result = '123'.removeDigits();
+      expect(result, '');
+    });
+
+    test('test 4', () {
+      final result = ''.removeDigits();
+      expect(result, '');
+    });
+  });
+
+  group('left', () {
+    test('test 1', () {
+      final result = 'abc123'.left(3);
+      expect(result, 'abc');
+    });
+
+    test('test 2', () {
+      final result = ''.left(3);
+      expect(result, '');
+    });
+
+    test('test 3', () {
+      final result = 'abc123'.left(0);
+      expect(result, 'abc123');
+    });
+
+    test('test 4', () sync* {
+      expect('abc123'.left(-1), throwsAssertionError);
+    });
+  });
+
+  group('right', () {
+    test('test 1', () {
+      final result = 'abc123'.right(3);
+      expect(result, '123');
+    });
+
+    test('test 2', () {
+      final result = ''.right(3);
+      expect(result, '');
+    });
+
+    test('test 3', () {
+      final result = 'abc123'.right(0);
+      expect(result, 'abc123');
+    });
+
+    test('test 4', () sync* {
+      expect('abc123'.right(-1), throwsAssertionError);
+    });
+  });
+
+  group('indexed', () {
+    test('test 1', () {
+      final result = [1, 2, 3].indexed.toList();
+      expect(result, [
+        (index: 0, element: 1),
+        (index: 1, element: 2),
+        (index: 2, element: 3),
+      ]);
+    });
+
+    test('test 2', () {
+      final result = [].indexed.toList();
+      expect(result, []);
+    });
+  });
+
+  group('selectMany', () {
+    var users = [
+      User(name: "Reza", roles: ["Superadmin"]),
+      User(name: "Amin", roles: ["Guest", "Reseption"]),
+      User(name: "Nima", roles: ["Nurse", "Guest"]),
+    ];
+
+    test('test 1', () {
+      final result = users.selectMany((user) => user.roles, (user, role) => (user.name, role));
+      expect(result, [
+        ('Reza', 'Superadmin'),
+        ('Amin', 'Guest'),
+        ('Amin', 'Reseption'),
+        ('Nima', 'Nurse'),
+        ('Nima', 'Guest'),
+      ]);
+    });
+  });
+}
+
+class User {
+  final String name;
+  final List<String> roles;
+  User({required this.name, required this.roles});
 }
