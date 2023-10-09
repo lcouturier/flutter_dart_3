@@ -258,30 +258,13 @@ void main() {
     });
   });
 
-  group('indexed', () {
-    test('test 1', () {
-      final result = [1, 2, 3].indexed.toList();
-      expect(result, [
-        (index: 0, element: 1),
-        (index: 1, element: 2),
-        (index: 2, element: 3),
-      ]);
-    });
-
-    test('test 2', () {
-      final result = [].indexed.toList();
-      expect(result, []);
-    });
-  });
-
   group('selectMany', () {
-    var users = [
-      User(name: "Reza", roles: ["Superadmin"]),
-      User(name: "Amin", roles: ["Guest", "Reseption"]),
-      User(name: "Nima", roles: ["Nurse", "Guest"]),
-    ];
-
     test('test 1', () {
+      var users = [
+        (name: "Reza", roles: ["Superadmin"]),
+        (name: "Amin", roles: ["Guest", "Reseption"]),
+        (name: "Nima", roles: ["Nurse", "Guest"]),
+      ];
       final result = users.selectMany((user) => user.roles, (user, role) => (user.name, role));
       expect(result, [
         ('Reza', 'Superadmin'),
@@ -291,11 +274,65 @@ void main() {
         ('Nima', 'Guest'),
       ]);
     });
-  });
-}
 
-class User {
-  final String name;
-  final List<String> roles;
-  User({required this.name, required this.roles});
+    test('test 2', () {
+      var users = [
+        (name: "Reza", roles: ["Superadmin"]),
+        (name: "Amin", roles: ["Guest", "Reseption"]),
+        (name: "Nima", roles: ["Nurse"]),
+      ];
+      final result = users.selectMany((user) => user.roles, (user, role) => (user.name, role));
+      expect(result, [
+        ('Reza', 'Superadmin'),
+        ('Amin', 'Guest'),
+        ('Amin', 'Reseption'),
+        ('Nima', 'Nurse'),
+      ]);
+    });
+
+    test('test 3', () {
+      var users = [
+        (name: "Reza", roles: <String>["Superadmin"]),
+        (name: "Amin", roles: <String>["Guest", "Reseption"]),
+        (name: "Nima", roles: <String>[]),
+      ];
+      final result = users.selectMany((user) => user.roles, (user, role) => (user.name, role));
+      expect(result, [
+        ('Reza', 'Superadmin'),
+        ('Amin', 'Guest'),
+        ('Amin', 'Reseption'),
+      ]);
+    });
+  });
+
+  group('whereJoin', () {
+    test('test 1', () {
+      var users = [
+        (name: "Reza", roles: ["Superadmin"]),
+        (name: "Amin", roles: ["Guest", "Reseption"]),
+        (name: "Nima", roles: ["Nurse", "Guest"]),
+      ];
+
+      var roles = ['Guest'];
+
+      final result = users.joinWhere(roles, (user, role) => user.roles.contains(role)).map((e) => e.$1.name).toList();
+      expect(result, [
+        'Amin',
+        'Nima',
+      ]);
+    });
+  });
+
+  group('passengger', () {
+    test('test 1', () {
+      var user = (name: "Reza", isAnonymous: true, isDisabled: true);
+      final result = switch (user) {
+        (name: _, isAnonymous: true, isDisabled: true) => 'Anonymous',
+        (name: _, isAnonymous: false, isDisabled: true) => 'Disabled',
+        (name: _, isAnonymous: false, isDisabled: false) => 'Active',
+        _ => 'empty'
+      };
+      expect(result, 'Anonymous');
+    });
+  });
 }

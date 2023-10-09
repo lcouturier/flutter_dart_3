@@ -2,7 +2,6 @@ import 'package:flutter_dart_3/extensions.dart';
 
 typedef TestIndexed<T> = bool Function(int, T);
 typedef MapIndexed<T, R> = R Function(int, T);
-typedef IndexedElement<T> = ({int index, T element});
 
 extension IterableIntExtensions on Iterable<num> {
   num _sum(Iterable<num> items) {
@@ -30,26 +29,18 @@ extension IterableExtensions<T> on Iterable<T> {
     return sum;
   }
 
-  // indexed
-  Iterable<IndexedElement<T>> get indexed sync* {
-    int i = 0;
-    for (final e in this) {
-      yield (index: i++, element: e);
-    }
-  }
-
   Iterable<T> separatedBy(T separator) {
-    return this.indexed.expand((e) => [if (e.index > 0) separator, e.element]);
+    return indexed.expand((e) => [if (e.$1 > 0) separator, e.$2]);
   }
 
   // mapIndexed
   Iterable<R> mapIndexed<R>(R Function(int index, T item) operation) {
-    return indexed.map((e) => operation(e.index, e.element));
+    return indexed.map((e) => operation(e.$1, e.$2));
   }
 
   // whereIndexed
   Iterable<T> whereIndexed(bool Function(int index, T item) test) {
-    return indexed.where((e) => test(e.index, e.element)).map((e) => e.element);
+    return indexed.where((e) => test(e.$1, e.$2)).map((e) => e.$2);
   }
 
   Iterable<List<T>> split(int size) {
@@ -58,7 +49,29 @@ extension IterableExtensions<T> on Iterable<T> {
     return List.generate(chunks, (i) => skip(i * size).take(size).toList());
   }
 
+  /// Projects each element of a sequence to an Iterable<E>, flattens the resulting sequences into one sequence,
+  /// and invokes a result selector function on each element.
+  ///
+  /// ```dart
+  /// var users = [
+  ///  (name: "Reza", roles: ["Superadmin"]),
+  ///  (name: "Amin", roles: ["Guest", "Reseption"]),
+  ///  (name: "Nima", roles: ["Nurse", "Guest"]),
+  /// ];
+  /// final result = users.selectMany((user) => user.roles, (user, role) => (user.name, role));
+  /// expect(result, [
+  ///   ('Reza', 'Superadmin'),
+  ///   ('Amin', 'Guest'),
+  ///   ('Amin', 'Reseption'),
+  ///   ('Nima', 'Nurse'),
+  ///   ('Nima', 'Guest'),
+  /// ]);
+  /// ```
   Iterable<R> selectMany<R, S>(Iterable<S> Function(T) collectionSelector, R Function(T, S) resultSelector) {
-    return expand((p) => collectionSelector(p).map((t) => resultSelector(p, t)));
+    return expand((e) => collectionSelector(e).map((t) => resultSelector(e, t)));
+  }
+
+  Iterable<(T, S)> joinWhere<S>(Iterable<S> others, bool Function(T, S) test) {
+    return expand((x) => others.where((y) => test(x, y)).map((y) => (x, y)));
   }
 }

@@ -1,4 +1,7 @@
-import 'package:flutter/rendering.dart';
+// ignore_for_file: unused_element
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 extension FunctionCompositionExtensions<T1, T2, T3> on T2 Function(T1) {
   T3 Function(T1) andThen(T3 Function(T2) operation) => (args) => operation(this(args));
@@ -93,4 +96,8 @@ extension DateTimeExtensions on DateTime {
   int get daysInYear => isLeapYear ? 366 : 365;
   int get dayOfYear => difference(DateTime(year, 1, 1)).inDays + 1;
   int get weekOfYear => ((dayOfYear - weekday + 10) / 7).floor();
+}
+
+extension on BuildContext {
+  T readSafe<T extends StateStreamableSource<Object?>>() => BlocProvider.of<T>(this);
 }
