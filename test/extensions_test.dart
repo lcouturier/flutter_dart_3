@@ -335,4 +335,18 @@ void main() {
       expect(result, 'Anonymous');
     });
   });
+
+  group('String extensions', () {
+    test('reverse', () {
+      const value = "Hello World";
+      final result = ExtensionString.reverseString(value);
+      expect(result, 'dlroW olleH');
+    });
+
+    test('reverse', () {
+      const value = "Hello World";
+      final result = value.reversed;
+      expect(result, 'dlroW olleH');
+    });
+  });
 }

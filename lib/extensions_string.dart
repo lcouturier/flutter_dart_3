@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 extension ExtensionString on String {
   String removeDigits() => replaceAll(RegExp(r'\d'), '');
   String removeNonDigits() => replaceAll(RegExp(r'\D'), '');
@@ -36,4 +38,13 @@ extension ExtensionString on String {
   bool get isDigitsOnly => digits == this;
   bool get isLettersOnly => letters == this;
   bool get isSymbolsOnly => symbols == this;
+
+  String get head => substring(0, 1);
+  String get tail => substring(1);
+  String get reversed => reverseString(this);
+
+  @visibleForTesting
+  static String reverseString(String input) {
+    return input.isEmpty ? '' : reverseString(input.tail) + input.head;
+  }
 }
