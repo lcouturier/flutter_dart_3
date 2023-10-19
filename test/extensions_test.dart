@@ -6,6 +6,57 @@ import 'package:flutter_dart_3/extensions_string.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  group('fold', () {
+    final items = [
+      (
+        segmentPlacement: (hasMultipleChoices: false, seatMapPlacement: ''),
+        preferencePlacement: (lastAvailableSeatComfortSpaceBlock: null),
+        item: 1
+      ),
+      (
+        segmentPlacement: (hasMultipleChoices: false, seatMapPlacement: ''),
+        preferencePlacement: (lastAvailableSeatComfortSpaceBlock: ''),
+        item: 2
+      ),
+      (
+        segmentPlacement: (hasMultipleChoices: true, seatMapPlacement: ''),
+        preferencePlacement: (lastAvailableSeatComfortSpaceBlock: null),
+        item: 3
+      ),
+      (
+        segmentPlacement: (hasMultipleChoices: true, seatMapPlacement: null),
+        preferencePlacement: (lastAvailableSeatComfortSpaceBlock: null),
+        item: 4
+      ),
+      (
+        segmentPlacement: (hasMultipleChoices: false, seatMapPlacement: ''),
+        preferencePlacement: (lastAvailableSeatComfortSpaceBlock: ''),
+        item: 5
+      ),
+    ];
+
+    test('test fold', () {
+      final result = items.fold(false, (acc, e) {
+        bool hasOnlySeatMap = !e.segmentPlacement.hasMultipleChoices && e.segmentPlacement.seatMapPlacement != null;
+        bool isLastAvailableSeatInComfortSpace = e.preferencePlacement.lastAvailableSeatComfortSpaceBlock != null;
+        return acc ? acc : !(hasOnlySeatMap || isLastAvailableSeatInComfortSpace);
+      });
+
+      expect(result, true);
+    });
+
+    test('test any', () {
+      final result = items
+          .map((e) => (
+                hasOnlySeatMap: !e.segmentPlacement.hasMultipleChoices && e.segmentPlacement.seatMapPlacement != null,
+                isLastAvailableSeatInComfortSpace: e.preferencePlacement.lastAvailableSeatComfortSpaceBlock != null
+              ))
+          .any((e) => !(e.hasOnlySeatMap || e.isLastAvailableSeatInComfortSpace));
+
+      expect(result, true);
+    });
+  });
+
   group('dateTime extensions', () {
     // weekOfYear
     test('weekOfYear 1', () {
@@ -337,12 +388,6 @@ void main() {
   });
 
   group('String extensions', () {
-    test('reverse', () {
-      const value = "Hello World";
-      final result = ExtensionString.reverseString(value);
-      expect(result, 'dlroW olleH');
-    });
-
     test('reverse', () {
       const value = "Hello World";
       final result = value.reversed;
