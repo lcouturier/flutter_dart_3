@@ -71,7 +71,7 @@ extension IterableExtensions<T> on Iterable<T> {
     return expand((e) => collectionSelector(e).map((t) => resultSelector(e, t)));
   }
 
-  Iterable<(T, S)> joinWhere<S>(Iterable<S> others, bool Function(T, S) test) {
-    return expand((x) => others.where((y) => test(x, y)).map((y) => (x, y)));
+  Iterable<R> joinWhere<S, R>(Iterable<S> others, bool Function(T, S) test, R Function(T, S) resultSelector) {
+    return expand((x) => others.where((y) => test(x, y)).map((y) => resultSelector(x, y)));
   }
 }

@@ -17,3 +17,42 @@ class TripsAndTravelersSelection {
 
   TripsAndTravelersSelection({required this.travelId, required this.travelers});
 }
+
+enum SearchTripStatus {
+  loading,
+  failure,
+  shopAskInfoSuccess,
+  shopShowResultsSuccess,
+  doorToDoorDisplaySuccess,
+  functionalFailure,
+}
+
+class SearchTripParams {
+  final bool wishBike;
+  final bool accountFceCodeEnabled;
+  final bool trainExpected;
+
+  SearchTripParams(this.wishBike, this.accountFceCodeEnabled, this.trainExpected);
+
+  SearchTripParams copyWith({bool? wishBike, bool? accountFceCodeEnabled, bool? trainExpected}) {
+    return SearchTripParams(
+      wishBike ?? this.wishBike,
+      accountFceCodeEnabled ?? this.accountFceCodeEnabled,
+      trainExpected ?? this.trainExpected,
+    );
+  }
+}
+
+class SearchTripState {
+  final SearchTripStatus status;
+  final SearchTripParams searchParams;
+
+  SearchTripState(this.status, this.searchParams);
+
+  SearchTripState copyWith({SearchTripStatus? status, SearchTripParams? searchParams}) {
+    return SearchTripState(
+      status ?? this.status,
+      searchParams ?? this.searchParams,
+    );
+  }
+}

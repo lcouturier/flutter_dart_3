@@ -366,7 +366,7 @@ void main() {
 
       var roles = ['Guest'];
 
-      final result = users.joinWhere(roles, (user, role) => user.roles.contains(role)).map((e) => e.$1.name).toList();
+      final result = users.joinWhere(roles, (user, role) => user.roles.contains(role), (user, role) => (user.name));
       expect(result, [
         'Amin',
         'Nima',
