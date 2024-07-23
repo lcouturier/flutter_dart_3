@@ -39,7 +39,48 @@ extension ExtensionString on String {
 
   String get head => substring(0, 1);
   String get tail => substring(1);
+
   String get reversed => _reverseString(this);
 
   static String _reverseString(String input) => input.isEmpty ? '' : _reverseString(input.tail) + input.head;
+
+  String plus({Object? element}) => padRight(length + 1, element?.toString() ?? '');
+
+  String operator <<(String? other) => this + (other ?? '');
+
+  String get removeDiacritics {
+    var withDiacritics = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
+    var withoutDiacritics = 'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
+
+    return splitMapJoin('',
+        onNonMatch: (char) =>
+            char.isNotEmpty && withDiacritics.contains(char) ? withoutDiacritics[withDiacritics.indexOf(char)] : char);
+  }
+}
+
+extension DurationExtensions on Duration {
+  String get formatted {
+    final seconds = inSeconds.remainder(60);
+    final minutes = inSeconds ~/ 60;
+    final hours = inSeconds ~/ 3600;
+    final days = inSeconds ~/ 86400;
+    return '${days.toString().padLeft(2, '0')}:${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+  }
+
+  String get Hm {
+    final minutes = inSeconds ~/ 60;
+    final hours = inSeconds ~/ 3600;
+    return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
+  }
+
+  String get Hms {
+    final seconds = inSeconds.remainder(60);
+    final minutes = inSeconds ~/ 60;
+    final hours = inSeconds ~/ 3600;
+    return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+  }
+}
+
+extension StringNullableExtensions on String? {
+  bool get isNotBlank => this != null && this!.trim().isNotEmpty;
 }

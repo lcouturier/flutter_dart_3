@@ -30,5 +30,19 @@ void main() {
       expect(result.count, 1);
       expect(result.semanticsLabel, 'semanticsLabel');
     });
+
+    test('test doublon', () {
+      final items = [
+        (1, 'test 1'),
+        (2, 'test 2'),
+        (3, 'test 3'),
+        (1, 'test 1'),
+        (2, 'test 2'),
+        (3, 'test 3'),
+      ];
+
+      final result = items.toSet().toList();
+      expect(result.length, 3);
+    });
   });
 }

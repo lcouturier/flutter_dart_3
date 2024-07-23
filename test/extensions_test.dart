@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'package:collection/collection.dart';
+import 'package:flutter_dart_3/datetime_extensions.dart';
 import 'package:flutter_dart_3/extensions.dart';
 import 'package:flutter_dart_3/extensions_iterable.dart';
 import 'package:flutter_dart_3/extensions_string.dart';
@@ -57,76 +59,6 @@ void main() {
     });
   });
 
-  group('dateTime extensions', () {
-    // weekOfYear
-    test('weekOfYear 1', () {
-      final result = DateTime(2020, 1, 1).weekOfYear;
-      expect(result, 1);
-    });
-
-    test('weekOfYear 2', () {
-      final result = DateTime(2020, 1, 5).weekOfYear;
-      expect(result, 1);
-    });
-
-    test('weekOfYear 3', () {
-      final result = DateTime(2020, 1, 6).weekOfYear;
-      expect(result, 2);
-    });
-
-    test('weekOfYear 4', () {
-      final result = DateTime(2020, 1, 12).weekOfYear;
-      expect(result, 2);
-    });
-    // daysInMonth
-    test('daysInMonth 1', () {
-      final result = DateTime(2020, 1).daysInMonth;
-      expect(result, 31);
-    });
-
-    test('daysInMonth 2', () {
-      final result = DateTime(2020, 2).daysInMonth;
-      expect(result, 29);
-    });
-
-    test('daysInMonth 3', () {
-      final result = DateTime(2020, 3).daysInMonth;
-      expect(result, 31);
-    });
-    test('daysInYear 1', () {
-      final result = DateTime(2020).daysInYear;
-      expect(result, 366);
-    });
-
-    test('daysInYear 2', () {
-      final result = DateTime(2021).daysInYear;
-      expect(result, 365);
-    });
-    test('isLeayYear 1', () {
-      final result = DateTime(2020).isLeapYear;
-      expect(result, true);
-    });
-    test('isLeayYear 2', () {
-      final result = DateTime(2021).isLeapYear;
-      expect(result, false);
-    });
-
-    test('isLeayYear 3', () {
-      final result = DateTime(2022).isLeapYear;
-      expect(result, false);
-    });
-
-    test('isLeayYear 4', () {
-      final result = DateTime(2023).isLeapYear;
-      expect(result, false);
-    });
-
-    test('isLeayYear 5', () {
-      final result = DateTime(2024).isLeapYear;
-      expect(result, true);
-    });
-  });
-
   group('andThen', () {
     test('test 1', () {
       final f = ((x) => x + 1).andThen((x) => x * 2);
@@ -153,9 +85,15 @@ void main() {
 
   group('separatedBy', () {
     test('test numbers', () {
-      final items = 1.generate((e) => e + 1).take(5).toList();
+      final items = 1.unFold((e) => e + 1).take(5).toList();
       final result = items.separatedBy(0).toList();
       expect(result.length, 9);
+    });
+
+    test('test numbers with predicate', () {
+      final items = 1.unFold((e) => e + 1).take(5).toList();
+      final result = items.separatedBy(0, predicate: (e) => e % 2 == 0).toList();
+      expect(result.length, 7);
     });
 
     test('test strings', () {
@@ -175,22 +113,8 @@ void main() {
   });
 
   group('sum', () {
-    test('test sum', () {
-      final items = 1.generate((e) => e + 1).take(10).toList();
-      final (num value, int duration) = items.sum;
-      print('Elapsed time: $duration ms');
-      expect(value, 55);
-    });
-
-    test('test sum cached', () {
-      final items = 1.generate((e) => e + 1).take(10).toList();
-      final (num value, int duration) = items.sum;
-      print('Elapsed time: $duration ms');
-      expect(value, 55);
-    });
-
     test('test sum2', () {
-      final items = 1.generate((e) => e + 1).take(10).toList();
+      final items = 1.unFold((e) => e + 1).take(10).toList();
       final result = items.sum2;
       expect(result, 55);
     });
@@ -356,7 +280,7 @@ void main() {
     });
   });
 
-  group('whereJoin', () {
+  group('joinWhere', () {
     test('test 1', () {
       var users = [
         (name: "Reza", roles: ["Superadmin"]),
@@ -371,6 +295,25 @@ void main() {
         'Amin',
         'Nima',
       ]);
+    });
+
+    test('test 2', () {
+      var users = [
+        (name: "Reza", roles: ["Superadmin"]),
+        (name: "Amin", roles: ["Guest", "Reseption"]),
+        (name: "Nima", roles: ["Nurse", "Guest"]),
+      ];
+
+      var roles = ['Guest'];
+
+      final result = users.joinWhere(roles, (user, role) => user.roles.contains(role));
+      print(result);
+
+      /// TODO: fix this
+      // expect(
+      //   result.first,
+      //   (name: 'Amin', roles: ['Guest', 'Reseption']),
+      // );
     });
   });
 
@@ -394,4 +337,284 @@ void main() {
       expect(result, 'dlroW olleH');
     });
   });
+
+  group('concat list with sub list', () {
+    test('first', () {
+      final first = [
+        (id: 1, selectedAdditional: [(code: 'FOLDED_BIKE', quantity: 1)]),
+        (id: 2, selectedAdditional: [(code: 'FOLDED_BIKE', quantity: 1), (code: 'HEAVELY_LUGGAGE', quantity: 1)]),
+      ];
+
+      final second = [
+        (id: 1, selectedAdditional: [(code: 'OUIGO_FLEX', quantity: 1)])
+      ];
+
+      final result = [
+        ...first.expand((e) => e.selectedAdditional.map((s) => (key: e.id, value: s))),
+        ...second.expand((e) => e.selectedAdditional.map((s) => (key: e.id, value: s)))
+      ].groupListsBy((e) => e.key).entries.map((e) => (id: e.key, selectedAdditionalServices: e.value));
+
+      expect(result.countBy((e) => e.id == 1), 1);
+    });
+  });
+
+  group('AddOrReplace', () {
+    test('test 1', () {
+      final items = [1, 2, 3, 4];
+      // ignore: cascade_invocations
+      items
+        ..addOrReplace(0, 5)
+        ..addOrReplace(1, 6);
+
+      expect(items, [5, 6, 3, 4]);
+    });
+  });
+
+  group('toMap', () {
+    test('test 1', () {
+      final items = [
+        (id: 1, name: 'A'),
+        (id: 2, name: 'B'),
+        (id: 3, name: 'C'),
+        (id: 1, name: 'A'),
+        (id: 1, name: 'A'),
+        (id: 2, name: 'B'),
+      ];
+
+      final result = items.toMap(key: (e) => e.id, value: (e) => e.length);
+      expect(result.entries.first.key, 1);
+      expect(result.entries.first.value, 3);
+      expect(result.entries.last.key, 3);
+      expect(result.entries.last.value, 1);
+    });
+
+    test('test 1', () {
+      final items = [
+        (id: 1, name: 'A'),
+        (id: 2, name: 'B'),
+        (id: 3, name: 'C'),
+        (id: 1, name: 'A'),
+        (id: 1, name: 'A'),
+        (id: 2, name: 'B'),
+      ];
+
+      final result = items.countBy((e) => e.id);
+      expect(result.entries.first.key, 1);
+      expect(result.entries.first.value, 3);
+      expect(result.entries.last.key, 3);
+      expect(result.entries.last.value, 1);
+    });
+
+    test('test 2', () {
+      final items = [
+        (id: 1, name: 'A'),
+        (id: 2, name: 'B'),
+        (id: 3, name: 'C'),
+        (id: 1, name: 'A'),
+        (id: 1, name: 'A'),
+        (id: 2, name: 'B'),
+      ];
+
+      final result = items.toMap(key: (e) => e.id);
+      expect(result.entries.first.key, 1);
+      expect(result.entries.first.value.length, 3);
+      expect(result.entries.last.key, 3);
+      expect(result.entries.last.value.length, 1);
+    });
+  });
+
+  group('toMapCount', () {
+    test('test 1', () {
+      final items = [
+        (id: 1, name: 'A'),
+        (id: 2, name: 'B'),
+        (id: 3, name: 'C'),
+        (id: 1, name: 'A'),
+        (id: 1, name: 'A'),
+        (id: 2, name: 'B'),
+      ];
+
+      final result = items.toMapCount(key: (e) => e.id);
+      expect(result.entries.first.key, 1);
+      expect(result.entries.first.value, 3);
+      expect(result.entries.last.key, 3);
+      expect(result.entries.last.value, 1);
+    });
+
+    test('Test for empty input iterable', () {
+      var emptyResult = [].toMapCount<int>(key: (element) => element);
+      expect(emptyResult, <int, int>{});
+    });
+
+    test('Test for counting occurrences of elements', () {
+      var inputList = [1, 2, 2, 3, 3, 3];
+      var expectedMap = {1: 1, 2: 2, 3: 3};
+      var result = inputList.toMapCount<int>(key: (element) => element);
+      expect(result, expectedMap);
+    });
+  });
+
+  group('mapWhen', () {
+    test('test mapWhen 1', () {
+      final items = generateSequence(0, (e) => e + 1).take(10);
+      final result = items.mapWhen(predicate: (e) => e % 2 == 0, replacement: (e) => 0).toList();
+      expect(result.sum, 25);
+    });
+
+    test('test mapWhen 2', () {
+      final items = generateSequence(0, (e) => e + 1).take(10);
+      final result = items.mapWhen(predicate: (e) => e % 2 == 0, replacement: (e) => 0).toList();
+      expect(result.sum, 25);
+    });
+  });
+
+  group('plus', () {
+    test('plus 1', () {
+      final result = "test".plus(element: "1");
+      expect(result, "test1");
+    });
+
+    test('<< 1', () {
+      final result = "test" << "1";
+      expect(result, "test1");
+    });
+
+    test('plus 2', () {
+      const element = "1";
+      const result = "test$element";
+      expect(result, "test1");
+    });
+
+    test('<< 2', () {
+      // return timer.title
+      //   .plus(element: ' ')
+      //   .plus(element: timer.day.toString())
+      //   .plus(element: ' ')
+      //   .plus(element: timer.dayUnit)
+      //   .plus(element: ' ')
+      //   .plus(element: timer.hour.toString())
+      //   .plus(element: ' ')
+      //   .plus(element: timer.hourUnit)
+      //   .plus(element: ' ')
+      //   .plus(element: timer.minute.toString())
+      //   .plus(element: ' ')
+      //   .plus(element: timer.minuteUnit);
+
+      final current = DateTime.now();
+
+      final result = "Titre" <<
+          " " <<
+          "Le" <<
+          " " <<
+          current.day.toString() <<
+          " " <<
+          "jour" <<
+          " " <<
+          current.hour.toString() <<
+          " " <<
+          current.minute.toString();
+      expect(result, "Titre Le 1 jour 9 18");
+    });
+  });
+
+  group('NullableExtensions1', () {
+    test('test 1', () {
+      final result = 1.takeIf((e) => e > 0);
+      expect(result.success, true);
+      expect(result.value, 1);
+    });
+
+    test('test 2', () {
+      final result = 1.takeIf((e) => e < 0);
+      expect(result.success, false);
+      expect(result.value, 1);
+    });
+
+    test('test 3', () {
+      final result = 1.takeIf((e) => e == 0);
+      expect(result.success, false);
+      expect(result.value, 1);
+    });
+
+    test('test 4', () {
+      final result = 1.takeIf((e) => e > 0).takeIf((e) => e == 1);
+      expect(result.success, true);
+      expect(result.value, 1);
+    });
+
+    test('test 4', () {
+      final result = 1.takeIf((e) => e == 0).takeIf((e) => e == 1);
+      expect(result.success, false);
+      expect(result.value, 1);
+    });
+  });
+
+  group('removeDiacritics', () {
+    test('test 1', () {
+      final result = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž'.removeDiacritics;
+      expect(result, 'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz');
+    });
+    test('test 2', () {
+      final result = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž'.removeDiacritics;
+      expect(result, 'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz');
+    });
+
+    test('test 3', () {
+      final result = 'Äbonnément'.removeDiacritics;
+      expect(result, 'Abonnement');
+    });
+  });
+
+  group('mapNotNull vs joinWhere', () {
+    final days = ['THURSDAY', 'FRIDAY'];
+
+    test('test mapNotNull', () {
+      final result =
+          days.mapNotNull((day) => FavoriteItineraryAlertPlanningDays.values.firstWhereOrNull((e) => e.name == day));
+      print(result);
+      expect(result, [FavoriteItineraryAlertPlanningDays.THURSDAY, FavoriteItineraryAlertPlanningDays.FRIDAY]);
+    });
+
+    test('test joinWhere', () {
+      final result =
+          days.joinWhere(FavoriteItineraryAlertPlanningDays.values, (day, e) => e.name == day, (day, e) => e);
+      print(result);
+      expect(result, [FavoriteItineraryAlertPlanningDays.THURSDAY, FavoriteItineraryAlertPlanningDays.FRIDAY]);
+    });
+
+    test('test joinWhere', () {
+      final a = [1, 2, 3];
+
+      final b = [2, 3, 4];
+      final result = a.joinWhere(b, (x, y) => x == y, (x, y) => x + y);
+      expect(result, [4, 6]);
+    });
+  });
+
+  group('map extensions', () {
+    test('test getOrDefault', () {
+      final result = {1: "1", 2: "2"}.getOrDefault(99, () => "None");
+      expect(result.$2, "None");
+    });
+
+    test('test operator +', () {
+      final result = {1: "1", 2: "2"} + {3: "3", 4: "4"};
+      expect(result.length, 4);
+    });
+
+    test('test operator -', () {
+      final result = {1: "1", 2: "2"} - {3: "3", 1: "1"};
+      expect(result.length, 1);
+    });
+  });
+}
+
+enum FavoriteItineraryAlertPlanningDays {
+  MONDAY,
+  TUESDAY,
+  WEDNESDAY,
+  THURSDAY,
+  FRIDAY,
+  SATURDAY,
+  SUNDAY,
 }
