@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'package:collection/collection.dart';
-import 'package:flutter_dart_3/datetime_extensions.dart';
 import 'package:flutter_dart_3/extensions.dart';
 import 'package:flutter_dart_3/extensions_iterable.dart';
 import 'package:flutter_dart_3/extensions_string.dart';
@@ -371,6 +370,23 @@ void main() {
   });
 
   group('toMap', () {
+    test('test', () {
+      final items = [
+        (DateTime(2025, 1, 10), 150),
+        (DateTime(2025, 1, 10), 200),
+        (DateTime(2025, 3, 6), 150),
+        (DateTime(2025, 5, 7), 200),
+        (DateTime(2024, 1, 10), 150),
+        (DateTime(2024, 1, 10), 200),
+        (DateTime(2024, 3, 6), 150),
+        (DateTime(2024, 5, 7), 200),
+      ];
+
+      final result = items.toMap(key: (item) => item.$1, value: (item) => item.map((e) => e.$2));
+
+      print(result);
+    });
+
     test('test 1', () {
       final items = [
         (id: 1, name: 'A'),
@@ -592,6 +608,13 @@ void main() {
   });
 
   group('map extensions', () {
+    test('test map', () {
+      final values = {1: "1", 2: "2"};
+
+      final result = values[10] ?? "None";
+      expect(result, "None");
+    });
+
     test('test getOrDefault', () {
       final result = {1: "1", 2: "2"}.getOrDefault(99, () => "None");
       expect(result.$2, "None");
@@ -617,4 +640,12 @@ enum FavoriteItineraryAlertPlanningDays {
   FRIDAY,
   SATURDAY,
   SUNDAY,
+}
+
+enum TravelerIcon { bike, pet }
+
+class TravelerFare {
+  final TravelerIcon icon;
+
+  TravelerFare({required this.icon});
 }

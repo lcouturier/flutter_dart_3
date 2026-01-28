@@ -77,7 +77,7 @@ extension Function1Extensions<F, R> on R Function(F) {
 }
 
 extension Function2Extensions<F, S, R> on R Function(F, S) {
-  Func1<S, R> curry(F first) => (second) => this(first, second);
+  Func1<S, R> curry(F first) => (S second) => this(first, second);
   Func1<S, R> operator <<(F first) => (second) => this(first, second);
   Func1<F, Func1<S, R>> get currying => curry2(this);
 }
@@ -106,6 +106,11 @@ extension MapExtensions<K, V> on Map<K, V> {
 
   Map<K, V> operator +(Map<K, V> other) => {...this, ...other};
   Map<K, V> operator -(Map<K, V> other) => Map.from(this)..removeWhere((key, value) => other.containsKey(key));
+}
+
+extension SetExtensions<T> on Set<T> {
+  Set<T> operator +(Set<T> other) => {...this, ...other};
+  Set<T> operator -(Set<T> other) => Set.from(this)..removeWhere((element) => other.contains(element));
 }
 
 extension StringExtensions on String {

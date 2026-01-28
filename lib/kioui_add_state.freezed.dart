@@ -12,7 +12,7 @@ part of 'kioui_add_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$KiOuiAddState {
@@ -72,6 +72,9 @@ class _$KiOuiAddStateCopyWithImpl<$Res, $Val extends KiOuiAddState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of KiOuiAddState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -91,6 +94,8 @@ class __$$KiOuiAddInitialImplCopyWithImpl<$Res>
       _$KiOuiAddInitialImpl _value, $Res Function(_$KiOuiAddInitialImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of KiOuiAddState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,7 +124,7 @@ class _$KiOuiAddInitialImpl implements KiOuiAddInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$KiOuiAddInitialImpl &&
@@ -130,7 +135,9 @@ class _$KiOuiAddInitialImpl implements KiOuiAddInitial {
   @override
   int get hashCode => Object.hash(runtimeType, kiOuiEnabled);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of KiOuiAddState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$KiOuiAddInitialImplCopyWith<_$KiOuiAddInitialImpl> get copyWith =>
@@ -205,7 +212,10 @@ abstract class KiOuiAddInitial implements KiOuiAddState {
       _$KiOuiAddInitialImpl;
 
   bool get kiOuiEnabled;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of KiOuiAddState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$KiOuiAddInitialImplCopyWith<_$KiOuiAddInitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -227,6 +237,8 @@ class __$$KiOuiValidateImplCopyWithImpl<$Res>
       _$KiOuiValidateImpl _value, $Res Function(_$KiOuiValidateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of KiOuiAddState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -255,7 +267,7 @@ class _$KiOuiValidateImpl implements KiOuiValidate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$KiOuiValidateImpl &&
@@ -266,7 +278,9 @@ class _$KiOuiValidateImpl implements KiOuiValidate {
   @override
   int get hashCode => Object.hash(runtimeType, promoCode);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of KiOuiAddState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$KiOuiValidateImplCopyWith<_$KiOuiValidateImpl> get copyWith =>
@@ -339,7 +353,10 @@ abstract class KiOuiValidate implements KiOuiAddState {
   const factory KiOuiValidate({final String? promoCode}) = _$KiOuiValidateImpl;
 
   String? get promoCode;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of KiOuiAddState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$KiOuiValidateImplCopyWith<_$KiOuiValidateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

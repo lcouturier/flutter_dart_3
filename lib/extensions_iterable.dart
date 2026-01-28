@@ -39,8 +39,34 @@ extension IterableExtensions<T> on Iterable<T> {
 
   //int countBy(bool Function(T) predicate) => where(predicate).length;
 
+  /// Adds a separator between each element of the sequence.
   Iterable<T> separatedBy(T separator, {bool Function(T)? predicate}) {
-    return indexed.expand((e) => [if ((e.$1 > 0) && (predicate?.call(e.$2) ?? true)) separator, e.$2]);
+    final p = predicate ?? ((e) => true);
+    return indexed.expand((e) => [if ((e.$1 > 0) && p(e.$2)) separator, e.$2]);
+  }
+
+  /// Adds a separator between each element of the sequence.
+  ///
+  /// ```dart
+  /// final list = [1, 2, 3, 4, 5];
+  /// final result = list << 0;
+  /// expect(result, [1, 0, 2, 0, 3, 0, 4, 0, 5]);
+  /// ```
+  Iterable<T> operator <<(T separator) => separatedBy(separator);
+
+  Iterable<T> divideItems(T divider, {bool Function(T) predicate = _defaultPredicate}) {
+    // Prevent from using prev.last in fold, which creates exponential recursion.
+    T? lastItem;
+
+    return fold(<T>[], (prev, cur) sync* {
+      yield* prev;
+
+      final listItemSafe = lastItem;
+      if (listItemSafe != null && predicate(listItemSafe) && predicate(cur)) yield divider;
+      lastItem = cur;
+
+      yield cur;
+    });
   }
 
   // mapIndexed
@@ -85,6 +111,18 @@ extension IterableExtensions<T> on Iterable<T> {
     final selector = resultSelector ?? (x, y) => (x, y) as R;
 
     return expand((x) => others.where((y) => test(x, y)).map((y) => selector(x, y)));
+  }
+
+  /// A left join on two iterables. The result will contain all elements of the
+  /// first iterable and the matching elements of the second iterable.
+  /// If no match is found, a null value is used.
+  Iterable<R> leftJoinWhere<S, R>(Iterable<S> others, bool Function(T, S) test, [R Function(T, S?)? resultSelector]) {
+    final selector = resultSelector ?? (x, y) => (x, y) as R;
+
+    return map((x) {
+      var matches = others.where((y) => test(x, y));
+      return matches.isEmpty ? [selector(x, null)] : matches.map((y) => selector(x, y));
+    }).expand((e) => e);
   }
 
   Iterable<T> mapWhen({required Predicate predicate, required T Function(T) replacement}) {
@@ -155,6 +193,8 @@ extension IterableExtensions<T> on Iterable<T> {
   }
 }
 
+bool _defaultPredicate(dynamic _) => true;
+
 extension ExtendedList<E> on List<E> {
   /// Adds a new element to the list at the specified index, or replaces the existing element if the index is greater than or equal to the length of the list.
   /// ```dart
@@ -175,4 +215,27 @@ extension ExtendedList<E> on List<E> {
       yield* expand(index, this[index]);
     }
   }
+
+  List<E> operator +(List<E> other) {
+    return [...this, ...other];
+  }
 }
+
+// extension IntRange on int {
+//   Iterable<int> range(int end) sync* {
+//     final direction = this <= end ? 1 : -1;
+//     yield* unFold((e) => e + direction).takeWhile((e) => this <= end ? e <= end : e >= end);
+//   }
+// }
+
+// extension IterableX<T> on Iterable<T> {
+//   Iterable<T> stepBy(int step) sync* {
+//     int index = 0;
+//     for (var item in this) {
+//       if (index % step == 0) {
+//         yield item;
+//       }
+//       index++;
+//     }
+//   }
+// }

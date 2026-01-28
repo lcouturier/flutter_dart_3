@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class SearchTripState {
   final SearchTripParams searchParams;
 
@@ -30,4 +32,24 @@ class Place {
   final String label;
 
   Place({required this.label});
+}
+
+typedef ChildWidgetBuilder = Widget Function(BuildContext context, Widget child);
+
+class ConditionalDecoratorWidget extends StatelessWidget {
+  const ConditionalDecoratorWidget({
+    super.key,
+    required this.condition,
+    required this.builder,
+    required this.child,
+  });
+
+  final bool condition;
+  final ChildWidgetBuilder builder;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return condition ? builder(context, child) : child;
+  }
 }

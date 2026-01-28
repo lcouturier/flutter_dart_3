@@ -36,3 +36,10 @@ sealed class CyclesAddingRulesState with _$CyclesAddingRulesState {
   const factory CyclesAddingRulesState.initial() = CyclesAddingRulesStateInitial;
   const factory CyclesAddingRulesState.change(int selectedValue) = CyclesAddingRulesStateChange;
 }
+
+@freezed
+sealed class PreviousNextProposalsState with _$PreviousNextProposalsState {
+  const factory PreviousNextProposalsState.initial() = PreviousNextProposalsStateInitial;
+  const factory PreviousNextProposalsState.loading() = PreviousNextProposalsStateLoading;
+  const factory PreviousNextProposalsState.failure(String error) = PreviousNextProposalsStateFailure;
+}

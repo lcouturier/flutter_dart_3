@@ -12,7 +12,7 @@ part of 'connection_time_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ConnectionTimeState {
@@ -84,6 +84,9 @@ class _$ConnectionTimeStateCopyWithImpl<$Res, $Val extends ConnectionTimeState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ConnectionTimeState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -106,6 +109,8 @@ class __$$ConnectionTimeStateInitialImplCopyWithImpl<$Res>
       $Res Function(_$ConnectionTimeStateInitialImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ConnectionTimeState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,7 +147,7 @@ class _$ConnectionTimeStateInitialImpl implements ConnectionTimeStateInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConnectionTimeStateInitialImpl &&
@@ -155,7 +160,9 @@ class _$ConnectionTimeStateInitialImpl implements ConnectionTimeStateInitial {
   @override
   int get hashCode => Object.hash(runtimeType, minValue, initialValue);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ConnectionTimeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ConnectionTimeStateInitialImplCopyWith<_$ConnectionTimeStateInitialImpl>
@@ -244,7 +251,10 @@ abstract class ConnectionTimeStateInitial implements ConnectionTimeState {
 
   int get minValue;
   int? get initialValue;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ConnectionTimeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ConnectionTimeStateInitialImplCopyWith<_$ConnectionTimeStateInitialImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -269,6 +279,8 @@ class __$$ConnectionTimeStateChangeImplCopyWithImpl<$Res>
       $Res Function(_$ConnectionTimeStateChangeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ConnectionTimeState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -297,7 +309,7 @@ class _$ConnectionTimeStateChangeImpl implements ConnectionTimeStateChange {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConnectionTimeStateChangeImpl &&
@@ -308,7 +320,9 @@ class _$ConnectionTimeStateChangeImpl implements ConnectionTimeStateChange {
   @override
   int get hashCode => Object.hash(runtimeType, selectedValue);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ConnectionTimeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ConnectionTimeStateChangeImplCopyWith<_$ConnectionTimeStateChangeImpl>
@@ -395,7 +409,10 @@ abstract class ConnectionTimeStateChange implements ConnectionTimeState {
       _$ConnectionTimeStateChangeImpl;
 
   int get selectedValue;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ConnectionTimeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ConnectionTimeStateChangeImplCopyWith<_$ConnectionTimeStateChangeImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -417,6 +434,9 @@ class __$$ConnectionTimeStateNotifyImplCopyWithImpl<$Res>
       _$ConnectionTimeStateNotifyImpl _value,
       $Res Function(_$ConnectionTimeStateNotifyImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ConnectionTimeState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -430,7 +450,7 @@ class _$ConnectionTimeStateNotifyImpl implements ConnectionTimeStateNotify {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConnectionTimeStateNotifyImpl);
@@ -535,6 +555,9 @@ class __$$ConnectionTimeStateResetImplCopyWithImpl<$Res>
       _$ConnectionTimeStateResetImpl _value,
       $Res Function(_$ConnectionTimeStateResetImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ConnectionTimeState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -548,7 +571,7 @@ class _$ConnectionTimeStateResetImpl implements ConnectionTimeStateReset {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConnectionTimeStateResetImpl);
@@ -697,7 +720,9 @@ mixin _$DiscountCardsState {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscountCardsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DiscountCardsStateCopyWith<DiscountCardsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -721,6 +746,8 @@ class _$DiscountCardsStateCopyWithImpl<$Res, $Val extends DiscountCardsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DiscountCardsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -766,6 +793,8 @@ class __$$DiscountCardsStateInitialImplCopyWithImpl<$Res>
       $Res Function(_$DiscountCardsStateInitialImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscountCardsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -844,7 +873,7 @@ class _$DiscountCardsStateInitialImpl implements DiscountCardsStateInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DiscountCardsStateInitialImpl &&
@@ -866,7 +895,9 @@ class _$DiscountCardsStateInitialImpl implements DiscountCardsStateInitial {
       const DeepCollectionEquality().hash(_initiallySelectedCards),
       birthDate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscountCardsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DiscountCardsStateInitialImplCopyWith<_$DiscountCardsStateInitialImpl>
@@ -970,8 +1001,11 @@ abstract class DiscountCardsStateInitial implements DiscountCardsState {
   List<String> get initiallySelectedCards;
   @override
   DateTime? get birthDate;
+
+  /// Create a copy of DiscountCardsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DiscountCardsStateInitialImplCopyWith<_$DiscountCardsStateInitialImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -998,6 +1032,8 @@ class __$$DiscountCardsStateCompletedImplCopyWithImpl<$Res>
       $Res Function(_$DiscountCardsStateCompletedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscountCardsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1042,7 +1078,7 @@ class _$DiscountCardsStateCompletedImpl implements DiscountCardsStateCompleted {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DiscountCardsStateCompletedImpl &&
@@ -1056,7 +1092,9 @@ class _$DiscountCardsStateCompletedImpl implements DiscountCardsStateCompleted {
   int get hashCode => Object.hash(runtimeType, birthDate,
       const DeepCollectionEquality().hash(_selectedCards));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscountCardsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DiscountCardsStateCompletedImplCopyWith<_$DiscountCardsStateCompletedImpl>
@@ -1153,8 +1191,11 @@ abstract class DiscountCardsStateCompleted implements DiscountCardsState {
   DateTime? get birthDate;
   @override
   Set<String>? get selectedCards;
+
+  /// Create a copy of DiscountCardsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DiscountCardsStateCompletedImplCopyWith<_$DiscountCardsStateCompletedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1165,7 +1206,9 @@ mixin _$User {
   String get lastName => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1187,6 +1230,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1228,6 +1273,8 @@ class __$$UserImplCopyWithImpl<$Res>
   __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1271,7 +1318,7 @@ class _$UserImpl implements _User {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
@@ -1285,7 +1332,9 @@ class _$UserImpl implements _User {
   @override
   int get hashCode => Object.hash(runtimeType, firstName, lastName, email);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
@@ -1304,8 +1353,11 @@ abstract class _User implements User {
   String get lastName;
   @override
   String get email;
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1369,6 +1421,9 @@ class _$CyclesAddingRulesStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of CyclesAddingRulesState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1388,6 +1443,9 @@ class __$$CyclesAddingRulesStateInitialImplCopyWithImpl<$Res>
       _$CyclesAddingRulesStateInitialImpl _value,
       $Res Function(_$CyclesAddingRulesStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CyclesAddingRulesState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1402,7 +1460,7 @@ class _$CyclesAddingRulesStateInitialImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CyclesAddingRulesStateInitialImpl);
@@ -1499,6 +1557,8 @@ class __$$CyclesAddingRulesStateChangeImplCopyWithImpl<$Res>
       $Res Function(_$CyclesAddingRulesStateChangeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CyclesAddingRulesState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1528,7 +1588,7 @@ class _$CyclesAddingRulesStateChangeImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CyclesAddingRulesStateChangeImpl &&
@@ -1539,7 +1599,9 @@ class _$CyclesAddingRulesStateChangeImpl
   @override
   int get hashCode => Object.hash(runtimeType, selectedValue);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CyclesAddingRulesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CyclesAddingRulesStateChangeImplCopyWith<
@@ -1615,8 +1677,473 @@ abstract class CyclesAddingRulesStateChange implements CyclesAddingRulesState {
       _$CyclesAddingRulesStateChangeImpl;
 
   int get selectedValue;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CyclesAddingRulesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CyclesAddingRulesStateChangeImplCopyWith<
           _$CyclesAddingRulesStateChangeImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$PreviousNextProposalsState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String error) failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String error)? failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String error)? failure,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PreviousNextProposalsStateInitial value) initial,
+    required TResult Function(PreviousNextProposalsStateLoading value) loading,
+    required TResult Function(PreviousNextProposalsStateFailure value) failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(PreviousNextProposalsStateInitial value)? initial,
+    TResult? Function(PreviousNextProposalsStateLoading value)? loading,
+    TResult? Function(PreviousNextProposalsStateFailure value)? failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PreviousNextProposalsStateInitial value)? initial,
+    TResult Function(PreviousNextProposalsStateLoading value)? loading,
+    TResult Function(PreviousNextProposalsStateFailure value)? failure,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PreviousNextProposalsStateCopyWith<$Res> {
+  factory $PreviousNextProposalsStateCopyWith(PreviousNextProposalsState value,
+          $Res Function(PreviousNextProposalsState) then) =
+      _$PreviousNextProposalsStateCopyWithImpl<$Res,
+          PreviousNextProposalsState>;
+}
+
+/// @nodoc
+class _$PreviousNextProposalsStateCopyWithImpl<$Res,
+        $Val extends PreviousNextProposalsState>
+    implements $PreviousNextProposalsStateCopyWith<$Res> {
+  _$PreviousNextProposalsStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of PreviousNextProposalsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$PreviousNextProposalsStateInitialImplCopyWith<$Res> {
+  factory _$$PreviousNextProposalsStateInitialImplCopyWith(
+          _$PreviousNextProposalsStateInitialImpl value,
+          $Res Function(_$PreviousNextProposalsStateInitialImpl) then) =
+      __$$PreviousNextProposalsStateInitialImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$PreviousNextProposalsStateInitialImplCopyWithImpl<$Res>
+    extends _$PreviousNextProposalsStateCopyWithImpl<$Res,
+        _$PreviousNextProposalsStateInitialImpl>
+    implements _$$PreviousNextProposalsStateInitialImplCopyWith<$Res> {
+  __$$PreviousNextProposalsStateInitialImplCopyWithImpl(
+      _$PreviousNextProposalsStateInitialImpl _value,
+      $Res Function(_$PreviousNextProposalsStateInitialImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PreviousNextProposalsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$PreviousNextProposalsStateInitialImpl
+    implements PreviousNextProposalsStateInitial {
+  const _$PreviousNextProposalsStateInitialImpl();
+
+  @override
+  String toString() {
+    return 'PreviousNextProposalsState.initial()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PreviousNextProposalsStateInitialImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String error) failure,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String error)? failure,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String error)? failure,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PreviousNextProposalsStateInitial value) initial,
+    required TResult Function(PreviousNextProposalsStateLoading value) loading,
+    required TResult Function(PreviousNextProposalsStateFailure value) failure,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(PreviousNextProposalsStateInitial value)? initial,
+    TResult? Function(PreviousNextProposalsStateLoading value)? loading,
+    TResult? Function(PreviousNextProposalsStateFailure value)? failure,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PreviousNextProposalsStateInitial value)? initial,
+    TResult Function(PreviousNextProposalsStateLoading value)? loading,
+    TResult Function(PreviousNextProposalsStateFailure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PreviousNextProposalsStateInitial
+    implements PreviousNextProposalsState {
+  const factory PreviousNextProposalsStateInitial() =
+      _$PreviousNextProposalsStateInitialImpl;
+}
+
+/// @nodoc
+abstract class _$$PreviousNextProposalsStateLoadingImplCopyWith<$Res> {
+  factory _$$PreviousNextProposalsStateLoadingImplCopyWith(
+          _$PreviousNextProposalsStateLoadingImpl value,
+          $Res Function(_$PreviousNextProposalsStateLoadingImpl) then) =
+      __$$PreviousNextProposalsStateLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$PreviousNextProposalsStateLoadingImplCopyWithImpl<$Res>
+    extends _$PreviousNextProposalsStateCopyWithImpl<$Res,
+        _$PreviousNextProposalsStateLoadingImpl>
+    implements _$$PreviousNextProposalsStateLoadingImplCopyWith<$Res> {
+  __$$PreviousNextProposalsStateLoadingImplCopyWithImpl(
+      _$PreviousNextProposalsStateLoadingImpl _value,
+      $Res Function(_$PreviousNextProposalsStateLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PreviousNextProposalsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$PreviousNextProposalsStateLoadingImpl
+    implements PreviousNextProposalsStateLoading {
+  const _$PreviousNextProposalsStateLoadingImpl();
+
+  @override
+  String toString() {
+    return 'PreviousNextProposalsState.loading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PreviousNextProposalsStateLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String error) failure,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String error)? failure,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String error)? failure,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PreviousNextProposalsStateInitial value) initial,
+    required TResult Function(PreviousNextProposalsStateLoading value) loading,
+    required TResult Function(PreviousNextProposalsStateFailure value) failure,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(PreviousNextProposalsStateInitial value)? initial,
+    TResult? Function(PreviousNextProposalsStateLoading value)? loading,
+    TResult? Function(PreviousNextProposalsStateFailure value)? failure,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PreviousNextProposalsStateInitial value)? initial,
+    TResult Function(PreviousNextProposalsStateLoading value)? loading,
+    TResult Function(PreviousNextProposalsStateFailure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PreviousNextProposalsStateLoading
+    implements PreviousNextProposalsState {
+  const factory PreviousNextProposalsStateLoading() =
+      _$PreviousNextProposalsStateLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$PreviousNextProposalsStateFailureImplCopyWith<$Res> {
+  factory _$$PreviousNextProposalsStateFailureImplCopyWith(
+          _$PreviousNextProposalsStateFailureImpl value,
+          $Res Function(_$PreviousNextProposalsStateFailureImpl) then) =
+      __$$PreviousNextProposalsStateFailureImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String error});
+}
+
+/// @nodoc
+class __$$PreviousNextProposalsStateFailureImplCopyWithImpl<$Res>
+    extends _$PreviousNextProposalsStateCopyWithImpl<$Res,
+        _$PreviousNextProposalsStateFailureImpl>
+    implements _$$PreviousNextProposalsStateFailureImplCopyWith<$Res> {
+  __$$PreviousNextProposalsStateFailureImplCopyWithImpl(
+      _$PreviousNextProposalsStateFailureImpl _value,
+      $Res Function(_$PreviousNextProposalsStateFailureImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PreviousNextProposalsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$PreviousNextProposalsStateFailureImpl(
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PreviousNextProposalsStateFailureImpl
+    implements PreviousNextProposalsStateFailure {
+  const _$PreviousNextProposalsStateFailureImpl(this.error);
+
+  @override
+  final String error;
+
+  @override
+  String toString() {
+    return 'PreviousNextProposalsState.failure(error: $error)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PreviousNextProposalsStateFailureImpl &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  /// Create a copy of PreviousNextProposalsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PreviousNextProposalsStateFailureImplCopyWith<
+          _$PreviousNextProposalsStateFailureImpl>
+      get copyWith => __$$PreviousNextProposalsStateFailureImplCopyWithImpl<
+          _$PreviousNextProposalsStateFailureImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String error) failure,
+  }) {
+    return failure(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String error)? failure,
+  }) {
+    return failure?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String error)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PreviousNextProposalsStateInitial value) initial,
+    required TResult Function(PreviousNextProposalsStateLoading value) loading,
+    required TResult Function(PreviousNextProposalsStateFailure value) failure,
+  }) {
+    return failure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(PreviousNextProposalsStateInitial value)? initial,
+    TResult? Function(PreviousNextProposalsStateLoading value)? loading,
+    TResult? Function(PreviousNextProposalsStateFailure value)? failure,
+  }) {
+    return failure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PreviousNextProposalsStateInitial value)? initial,
+    TResult Function(PreviousNextProposalsStateLoading value)? loading,
+    TResult Function(PreviousNextProposalsStateFailure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PreviousNextProposalsStateFailure
+    implements PreviousNextProposalsState {
+  const factory PreviousNextProposalsStateFailure(final String error) =
+      _$PreviousNextProposalsStateFailureImpl;
+
+  String get error;
+
+  /// Create a copy of PreviousNextProposalsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PreviousNextProposalsStateFailureImplCopyWith<
+          _$PreviousNextProposalsStateFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

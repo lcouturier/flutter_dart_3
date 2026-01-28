@@ -18,3 +18,20 @@ class Lazy<T> {
     return _value;
   }
 }
+
+class Late<T> {
+  final bool hasValue;
+  final T? value;
+  const Late({required this.hasValue, this.value});
+
+  const Late.initial()
+      : hasValue = false,
+        value = null;
+
+  const Late.of(T this.value) : hasValue = true;
+
+  @override
+  String toString() => 'Late(hasValue: $hasValue, value: $value)';
+
+  static const empty = Late.initial();
+}

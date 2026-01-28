@@ -12,7 +12,7 @@ part of 'travelers_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TravelersState {
@@ -84,6 +84,9 @@ class _$TravelersStateCopyWithImpl<$Res, $Val extends TravelersState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -103,6 +106,8 @@ class __$$InitialImplCopyWithImpl<$Res>
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -136,7 +141,7 @@ class _$InitialImpl implements Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitialImpl &&
@@ -147,7 +152,9 @@ class _$InitialImpl implements Initial {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
@@ -232,7 +239,10 @@ abstract class Initial implements TravelersState {
   const factory Initial(final List<String> items) = _$InitialImpl;
 
   List<String> get items;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -254,6 +264,8 @@ class __$$DidUpdateImplCopyWithImpl<$Res>
       _$DidUpdateImpl _value, $Res Function(_$DidUpdateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -287,7 +299,7 @@ class _$DidUpdateImpl implements DidUpdate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DidUpdateImpl &&
@@ -298,7 +310,9 @@ class _$DidUpdateImpl implements DidUpdate {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DidUpdateImplCopyWith<_$DidUpdateImpl> get copyWith =>
@@ -383,7 +397,10 @@ abstract class DidUpdate implements TravelersState {
   const factory DidUpdate(final List<String> items) = _$DidUpdateImpl;
 
   List<String> get items;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DidUpdateImplCopyWith<_$DidUpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -405,6 +422,8 @@ class __$$InvalidImplCopyWithImpl<$Res>
       _$InvalidImpl _value, $Res Function(_$InvalidImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -447,7 +466,7 @@ class _$InvalidImpl implements Invalid {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InvalidImpl &&
@@ -460,7 +479,9 @@ class _$InvalidImpl implements Invalid {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_items), description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$InvalidImplCopyWith<_$InvalidImpl> get copyWith =>
@@ -547,7 +568,10 @@ abstract class Invalid implements TravelersState {
 
   List<String> get items;
   String get description;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$InvalidImplCopyWith<_$InvalidImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -569,6 +593,8 @@ class __$$CompleteImplCopyWithImpl<$Res>
       _$CompleteImpl _value, $Res Function(_$CompleteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -597,7 +623,7 @@ class _$CompleteImpl implements Complete {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CompleteImpl &&
@@ -607,7 +633,9 @@ class _$CompleteImpl implements Complete {
   @override
   int get hashCode => Object.hash(runtimeType, trips);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CompleteImplCopyWith<_$CompleteImpl> get copyWith =>
@@ -693,7 +721,423 @@ abstract class Complete implements TravelersState {
       _$CompleteImpl;
 
   TripsAndTravelersSelection get trips;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TravelersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CompleteImplCopyWith<_$CompleteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$ShopTravelDateState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(DateTime currentDate, DateTime startDate,
+            DateTime? endDate, DateTime firstDate, DateTime lastDate)
+        initial,
+    required TResult Function(String message) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(DateTime currentDate, DateTime startDate,
+            DateTime? endDate, DateTime firstDate, DateTime lastDate)?
+        initial,
+    TResult? Function(String message)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(DateTime currentDate, DateTime startDate,
+            DateTime? endDate, DateTime firstDate, DateTime lastDate)?
+        initial,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Start value) initial,
+    required TResult Function(Error value) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Start value)? initial,
+    TResult? Function(Error value)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Start value)? initial,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ShopTravelDateStateCopyWith<$Res> {
+  factory $ShopTravelDateStateCopyWith(
+          ShopTravelDateState value, $Res Function(ShopTravelDateState) then) =
+      _$ShopTravelDateStateCopyWithImpl<$Res, ShopTravelDateState>;
+}
+
+/// @nodoc
+class _$ShopTravelDateStateCopyWithImpl<$Res, $Val extends ShopTravelDateState>
+    implements $ShopTravelDateStateCopyWith<$Res> {
+  _$ShopTravelDateStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ShopTravelDateState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$StartImplCopyWith<$Res> {
+  factory _$$StartImplCopyWith(
+          _$StartImpl value, $Res Function(_$StartImpl) then) =
+      __$$StartImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {DateTime currentDate,
+      DateTime startDate,
+      DateTime? endDate,
+      DateTime firstDate,
+      DateTime lastDate});
+}
+
+/// @nodoc
+class __$$StartImplCopyWithImpl<$Res>
+    extends _$ShopTravelDateStateCopyWithImpl<$Res, _$StartImpl>
+    implements _$$StartImplCopyWith<$Res> {
+  __$$StartImplCopyWithImpl(
+      _$StartImpl _value, $Res Function(_$StartImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ShopTravelDateState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? currentDate = null,
+    Object? startDate = null,
+    Object? endDate = freezed,
+    Object? firstDate = null,
+    Object? lastDate = null,
+  }) {
+    return _then(_$StartImpl(
+      null == currentDate
+          ? _value.currentDate
+          : currentDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      null == firstDate
+          ? _value.firstDate
+          : firstDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      null == lastDate
+          ? _value.lastDate
+          : lastDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$StartImpl implements Start {
+  const _$StartImpl(this.currentDate, this.startDate, this.endDate,
+      this.firstDate, this.lastDate);
+
+  @override
+  final DateTime currentDate;
+  @override
+  final DateTime startDate;
+  @override
+  final DateTime? endDate;
+  @override
+  final DateTime firstDate;
+  @override
+  final DateTime lastDate;
+
+  @override
+  String toString() {
+    return 'ShopTravelDateState.initial(currentDate: $currentDate, startDate: $startDate, endDate: $endDate, firstDate: $firstDate, lastDate: $lastDate)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StartImpl &&
+            (identical(other.currentDate, currentDate) ||
+                other.currentDate == currentDate) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.firstDate, firstDate) ||
+                other.firstDate == firstDate) &&
+            (identical(other.lastDate, lastDate) ||
+                other.lastDate == lastDate));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, currentDate, startDate, endDate, firstDate, lastDate);
+
+  /// Create a copy of ShopTravelDateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$StartImplCopyWith<_$StartImpl> get copyWith =>
+      __$$StartImplCopyWithImpl<_$StartImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(DateTime currentDate, DateTime startDate,
+            DateTime? endDate, DateTime firstDate, DateTime lastDate)
+        initial,
+    required TResult Function(String message) error,
+  }) {
+    return initial(currentDate, startDate, endDate, firstDate, lastDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(DateTime currentDate, DateTime startDate,
+            DateTime? endDate, DateTime firstDate, DateTime lastDate)?
+        initial,
+    TResult? Function(String message)? error,
+  }) {
+    return initial?.call(currentDate, startDate, endDate, firstDate, lastDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(DateTime currentDate, DateTime startDate,
+            DateTime? endDate, DateTime firstDate, DateTime lastDate)?
+        initial,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(currentDate, startDate, endDate, firstDate, lastDate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Start value) initial,
+    required TResult Function(Error value) error,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Start value)? initial,
+    TResult? Function(Error value)? error,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Start value)? initial,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Start implements ShopTravelDateState {
+  const factory Start(
+      final DateTime currentDate,
+      final DateTime startDate,
+      final DateTime? endDate,
+      final DateTime firstDate,
+      final DateTime lastDate) = _$StartImpl;
+
+  DateTime get currentDate;
+  DateTime get startDate;
+  DateTime? get endDate;
+  DateTime get firstDate;
+  DateTime get lastDate;
+
+  /// Create a copy of ShopTravelDateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$StartImplCopyWith<_$StartImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$ShopTravelDateStateCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ShopTravelDateState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$ErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ErrorImpl implements Error {
+  const _$ErrorImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'ShopTravelDateState.error(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of ShopTravelDateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(DateTime currentDate, DateTime startDate,
+            DateTime? endDate, DateTime firstDate, DateTime lastDate)
+        initial,
+    required TResult Function(String message) error,
+  }) {
+    return error(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(DateTime currentDate, DateTime startDate,
+            DateTime? endDate, DateTime firstDate, DateTime lastDate)?
+        initial,
+    TResult? Function(String message)? error,
+  }) {
+    return error?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(DateTime currentDate, DateTime startDate,
+            DateTime? endDate, DateTime firstDate, DateTime lastDate)?
+        initial,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Start value) initial,
+    required TResult Function(Error value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Start value)? initial,
+    TResult? Function(Error value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Start value)? initial,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Error implements ShopTravelDateState {
+  const factory Error(final String message) = _$ErrorImpl;
+
+  String get message;
+
+  /// Create a copy of ShopTravelDateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -3,16 +3,17 @@ class FilterChipData {
   final int? count;
   final String semanticsLabel;
 
+  static const FilterChipData empty = FilterChipData(
+    label: null,
+    count: null,
+    semanticsLabel: '',
+  );
+
   const FilterChipData({
     required this.label,
     required this.count,
     required this.semanticsLabel,
   });
-
-  const FilterChipData.empty()
-      : label = null,
-        count = null,
-        semanticsLabel = '';
 
   FilterChipData copyWith({
     String? Function()? label,

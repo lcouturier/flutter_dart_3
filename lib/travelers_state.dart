@@ -56,3 +56,15 @@ class SearchTripState {
     );
   }
 }
+
+@freezed
+sealed class ShopTravelDateState with _$ShopTravelDateState {
+  const factory ShopTravelDateState.initial(
+    DateTime currentDate,
+    DateTime startDate,
+    DateTime? endDate,
+    DateTime firstDate,
+    DateTime lastDate,
+  ) = Start;
+  const factory ShopTravelDateState.error(String message) = Error;
+}
