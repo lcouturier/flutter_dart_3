@@ -1,11 +1,11 @@
-class ExactJoinIterator<A, B, K> implements Iterator<({A left, B right})> {
+class InnerJoinIterator<A, B, K> implements Iterator<({A left, B right})> {
   final Iterator<A> _leftIterator;
   final Map<K, B> _rightIndex;
   final K Function(A) _leftKey;
 
   ({A left, B right})? _current;
 
-  ExactJoinIterator(
+  InnerJoinIterator(
     Iterable<A> left,
     Iterable<B> right, {
     required K Function(A) leftKey,
@@ -37,13 +37,13 @@ class ExactJoinIterator<A, B, K> implements Iterator<({A left, B right})> {
   }
 }
 
-class ExactJoinIterable<L, R, K> extends Iterable<({L left, R right})> {
+class InnerJoinIterable<L, R, K> extends Iterable<({L left, R right})> {
   final Iterable<L> left;
   final Iterable<R> right;
   final K Function(L) leftKey;
   final K Function(R) rightKey;
 
-  ExactJoinIterable({
+  InnerJoinIterable({
     required this.left,
     required this.right,
     required this.leftKey,
@@ -51,10 +51,10 @@ class ExactJoinIterable<L, R, K> extends Iterable<({L left, R right})> {
   });
 
   @override
-  Iterator<({L left, R right})> get iterator => ExactJoinIterator(left, right, leftKey: leftKey, rightKey: rightKey);
+  Iterator<({L left, R right})> get iterator => InnerJoinIterator(left, right, leftKey: leftKey, rightKey: rightKey);
 }
 
 extension InnerJoinExtension<L> on Iterable<L> {
   Iterable<({L left, R right})> innerJoin<R, K>(Iterable<R> other, K Function(L) leftKey, K Function(R) rightKey) =>
-      ExactJoinIterable<L, R, K>(left: this, right: other, leftKey: leftKey, rightKey: rightKey);
+      InnerJoinIterable<L, R, K>(left: this, right: other, leftKey: leftKey, rightKey: rightKey);
 }
