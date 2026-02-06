@@ -26,8 +26,10 @@ void main() {
         const _Person('Bob', 30),
       ];
 
-      final result =
-          leftItems.leftJoin(rightItems, (l) => l.name, (r) => r.name).map((e) => (e.$1.name, e.$2 != null)).toList();
+      final result = leftItems
+          .leftJoin(rightItems, (l) => l.name, (r) => r.name)
+          .map((e) => (e.left.name, e.right != null))
+          .toList();
       expect(result, [
         ('Charlie', true),
         ('Bob', true),

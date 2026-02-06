@@ -2,9 +2,6 @@
 
 import 'dart:math';
 
-import 'package:characters/characters.dart';
-import 'package:collection/collection.dart';
-import 'package:flutter_dart_3/extensions_iterable.dart';
 import 'package:flutter_dart_3/person.dart';
 
 // ignore_for_file: avoid_print
