@@ -1,8 +1,11 @@
 // ignore_for_file: unused_element
 
+import 'dart:core';
 import 'dart:math';
 
-import 'package:flutter_dart_3/person.dart';
+import 'package:flutter/material.dart';
+
+
 
 // ignore_for_file: avoid_print
 
@@ -17,41 +20,32 @@ enum CardStatus {
 }
 
 void main(List<String> arguments) {
-  // String text = "Développement";
-  // int maxLength = 5;
+  String text = "Développement";
+  int maxLength = 5;
 
-  // for (final chunk in text.characters.split(Characters.empty).toList().asMap().entries) {
-  //   if (chunk.key % maxLength == 0 && chunk.key != 0) {
-  //     print('-');
-  //   }
-  //   print(chunk.value);
-  // }
-  // final p = Person(name: 'test');
-  // if (p case Person(:final email?, :final age?)) {
-  //   print('email: $email, age: $age');
-  // }
-
-  // final items = [
-  //   (DateTime(2025, 1, 10), 150),
-  //   (DateTime(2025, 1, 10), 200),
-  //   (DateTime(2025, 3, 6), 150),
-  //   (DateTime(2025, 5, 7), 200),
-  //   (DateTime(2024, 1, 10), 150),
-  //   (DateTime(2024, 1, 10), 200),
-  //   (DateTime(2024, 3, 6), 150),
-  //   (DateTime(2024, 5, 7), 200)
-  // ];
-
-  // final result = items.toMap(key: (item) => item.$1, value: (item) => item.map((e) => e.$2));
-  // print(result);
-
-  final p = Person(name: "test", age: 10);
-
-  final result = p.hasMail;
-
-  if (result.$1) {
-    print(result.$2);
+  for (final chunk in text.characters.split(Characters.empty).toList().asMap().entries) {
+    if (chunk.key % maxLength == 0 && chunk.key != 0) {
+      print('-');
+    }
+    print(chunk.value);
   }
+  
+
+  final items = [
+    (DateTime(2025, 1, 10), 150),
+    (DateTime(2025, 1, 10), 200),
+    (DateTime(2025, 3, 6), 150),
+    (DateTime(2025, 5, 7), 200),
+    (DateTime(2024, 1, 10), 150),
+    (DateTime(2024, 1, 10), 200),
+    (DateTime(2024, 3, 6), 150),
+    (DateTime(2024, 5, 7), 200)
+  ];
+
+  
+  print(items);
+
+  
 }
 
 (double, double) geoLocation(String name) {
