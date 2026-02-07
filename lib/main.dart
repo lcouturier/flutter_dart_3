@@ -42,10 +42,7 @@ void main(List<String> arguments) {
     (DateTime(2024, 5, 7), 200)
   ];
 
-  
   print(items);
-
-  
 }
 
 (double, double) geoLocation(String name) {
