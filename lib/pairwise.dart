@@ -31,9 +31,5 @@ class PairwiseIterable<T> extends Iterable<({T left, T right})> {
 }
 
 extension PairwiseExtension<T> on Iterable<T> {
-  /// Pairwise
-  /// returns an iterable of pairs
-  /// example: [1,2,3,4,5].pairwise()
-  /// returns [(1,2), (2,3), (3,4), (4,5)]
   Iterable<({T left, T right})> pairwise() => PairwiseIterable(this);
 }
