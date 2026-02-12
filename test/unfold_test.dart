@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:flutter_dart_3/factorial.dart';
 import 'package:flutter_dart_3/unfold.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -16,7 +17,10 @@ void main() {
     });
 
     test('iterate DateTime', () {
-      final result = DateTime(2020).iterate((x) => x.add(const Duration(days: 1))).take(10).toList();
+      final result = DateTime(2020)
+          .iterate((x) => x.add(const Duration(days: 1)))
+          .take(10)
+          .toList();
       expect(result, [
         DateTime(
           2020,
@@ -43,6 +47,13 @@ void main() {
       for (final v in (1, 1).iterate((e) => (e.$1 * e.$2, e.$2 + 1)).take(10)) {
         print(v.toString());
       }
+    });
+  });
+
+  group('factorial', () {
+    test('iterate int', () {
+      final f = FactorialIterable();
+      print(f.take(10).join(', '));
     });
   });
 }
