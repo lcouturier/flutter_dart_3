@@ -55,5 +55,12 @@ void main() {
       final f = FactorialIterable();
       print(f.take(10).join(', '));
     });
+
+    test('factirial cache', () {
+      final f = factorial();
+      print(f(10));
+      print(f(11));
+      print(f(11));
+    });
   });
 }
