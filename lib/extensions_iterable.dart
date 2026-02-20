@@ -40,9 +40,15 @@ extension IterableExtensions<T> on Iterable<T> {
   //int countBy(bool Function(T) predicate) => where(predicate).length;
 
   /// Adds a separator between each element of the sequence.
-  Iterable<T> separatedBy(T separator, {bool Function(T)? predicate}) {
-    final p = predicate ?? ((e) => true);
-    return indexed.expand((e) => [if ((e.$1 > 0) && p(e.$2)) separator, e.$2]);
+  Iterable<T> separatedBy(T separator) sync* {
+    bool first = true;
+    for (var element in this) {
+      if (!first) {
+        yield separator;
+      }
+      yield element;
+      first = false;
+    }
   }
 
   /// Adds a separator between each element of the sequence.

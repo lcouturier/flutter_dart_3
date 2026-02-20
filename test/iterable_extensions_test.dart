@@ -40,7 +40,7 @@ void main() {
     });
 
     test('letters with predicate', () {
-      final result = ['a', 'b', 'c'].separatedBy('x', predicate: (e) => e == 'b').join();
+      final result = ['a', 'b', 'c'].separatedBy('x').join();
       expect(result, 'axbc');
     });
 
@@ -55,7 +55,7 @@ void main() {
     });
 
     test('numbers with predicate', () {
-      final result = [1, 2, 3, 4].separatedBy(0, predicate: (e) => e.isEven).map((e) => e.toString()).join();
+      final result = [1, 2, 3, 4].separatedBy(0).map((e) => e.toString()).join();
       expect(result, '102304');
     });
 

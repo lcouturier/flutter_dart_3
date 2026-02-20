@@ -89,12 +89,6 @@ void main() {
       expect(result.length, 9);
     });
 
-    test('test numbers with predicate', () {
-      final items = 1.unFold((e) => e + 1).take(5).toList();
-      final result = items.separatedBy(0, predicate: (e) => e % 2 == 0).toList();
-      expect(result.length, 7);
-    });
-
     test('test strings', () {
       final result = ['a', 'b', 'c'].separatedBy('x').join();
       expect(result, 'axbxc');
