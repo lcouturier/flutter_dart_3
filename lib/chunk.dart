@@ -1,5 +1,5 @@
 extension ChunkedIterable<T> on Iterable<T> {
-  Iterable<List<T>> chunked(int size) sync* {
+  Iterable<List<T>> chunkedSync(int size) sync* {
     if (size <= 0) {
       throw ArgumentError.value(size, 'size', 'Must be > 0');
     }
