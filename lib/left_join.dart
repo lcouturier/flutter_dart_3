@@ -1,7 +1,7 @@
-class LeftJoinIterator<L, R, K> implements Iterator<({L left, R? right})> {
-  final Iterator<L> _left;
-  final Map<K, R> _rightIndex;
-  final K Function(L) _leftKey;
+class LeftJoinIterator<L, R, K> implements Iterator<({L left, List<R> right})> {
+  late final Iterator<L> _left;
+  late final Map<K, List<R>> _rightIndex;
+  late final K Function(L) _leftKey;
 
   late L _currentLeft;
 
@@ -10,14 +10,27 @@ class LeftJoinIterator<L, R, K> implements Iterator<({L left, R? right})> {
     Iterable<R> right,
     K Function(L) leftKey,
     K Function(R) rightKey,
-  )   : _left = left.iterator,
-        _leftKey = leftKey,
-        _rightIndex = {
-          for (final r in right) rightKey(r): r,
-        };
+  ) {
+    _left = left.iterator;
+    _leftKey = leftKey;
+    _rightIndex = {};
+    for (final r in right) {
+      final key = rightKey(r);
+      if (_rightIndex.containsKey(key)) {
+        _rightIndex[key]!.add(r);
+      } else {
+        _rightIndex[key] = [r];
+      }
+    }
+  }
 
   @override
-  ({L left, R? right}) get current => (left: _currentLeft, right: _rightIndex[_leftKey(_currentLeft)]);
+  ({L left, List<R> right}) get current {
+    return (
+      left: _currentLeft,
+      right: _rightIndex[_leftKey(_currentLeft)] ?? [],
+    );
+  }
 
   @override
   bool moveNext() {
@@ -27,7 +40,7 @@ class LeftJoinIterator<L, R, K> implements Iterator<({L left, R? right})> {
   }
 }
 
-class LeftJoinIterable<L, R, K> extends Iterable<({L left, R? right})> {
+class LeftJoinIterable<L, R, K> extends Iterable<({L left, List<R> right})> {
   final Iterable<L> left;
   final Iterable<R> right;
   final K Function(L) leftKey;
@@ -36,10 +49,12 @@ class LeftJoinIterable<L, R, K> extends Iterable<({L left, R? right})> {
   LeftJoinIterable(this.left, this.right, this.leftKey, this.rightKey);
 
   @override
-  Iterator<({L left, R? right})> get iterator => LeftJoinIterator(left, right, leftKey, rightKey);
+  Iterator<({L left, List<R> right})> get iterator =>
+      LeftJoinIterator(left, right, leftKey, rightKey);
 }
 
 extension LeftJoinExtension<L> on Iterable<L> {
-  Iterable<({L left, R? right})> leftJoin<R, K>(Iterable<R> other, K Function(L) leftKey, K Function(R) rightKey) =>
+  Iterable<({L left, List<R> right})> leftJoin<R, K>(
+          Iterable<R> other, K Function(L) leftKey, K Function(R) rightKey) =>
       LeftJoinIterable(this, other, leftKey, rightKey);
 }
