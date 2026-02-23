@@ -41,22 +41,28 @@ void main() {
 
     test('letters with predicate', () {
       final result = ['a', 'b', 'c'].separatedBy('x').join();
-      expect(result, 'axbc');
+      expect(result, 'axbxc');
     });
 
     test('numbers', () {
-      final result = List.generate(10, (index) => index + 1).separatedBy(0).map((e) => e.toString()).join();
+      final result = List.generate(10, (index) => index + 1)
+          .separatedBy(0)
+          .map((e) => e.toString())
+          .join();
       expect(result, '10203040506070809010');
     });
 
     test('numbers operator', () {
-      final result = (List.generate(10, (index) => index + 1) << 0).map((e) => e.toString()).join();
+      final result = (List.generate(10, (index) => index + 1) << 0)
+          .map((e) => e.toString())
+          .join();
       expect(result, '10203040506070809010');
     });
 
     test('numbers with predicate', () {
-      final result = [1, 2, 3, 4].separatedBy(0).map((e) => e.toString()).join();
-      expect(result, '102304');
+      final result =
+          [1, 2, 3, 4].separatedBy(0).map((e) => e.toString()).join();
+      expect(result, '1020304');
     });
 
     test('', () {
@@ -89,7 +95,9 @@ void main() {
     });
 
     test('letters with predicate', () {
-      final result = ['a', 'b', 'c', 'd', 'e'].divideItems('x', predicate: (e) => e != 'b').join();
+      final result = ['a', 'b', 'c', 'd', 'e']
+          .divideItems('x', predicate: (e) => e != 'b')
+          .join();
       expect(result, 'abcxdxe');
     });
 
@@ -104,17 +112,25 @@ void main() {
     });
 
     test('two letter with predicate', () {
-      final result = ['a', 'b', 'c', 'd', 'e'].divideItems('x', predicate: (e) => e != 'b').join();
+      final result = ['a', 'b', 'c', 'd', 'e']
+          .divideItems('x', predicate: (e) => e != 'b')
+          .join();
       expect(result, 'abcxdxe');
     });
 
     test('numbers', () {
-      final result = List.generate(10, (index) => index + 1).divideItems(0).map((e) => e.toString()).join();
+      final result = List.generate(10, (index) => index + 1)
+          .divideItems(0)
+          .map((e) => e.toString())
+          .join();
       expect(result, '10203040506070809010');
     });
 
     test('numbers with predicate', () {
-      final result = [1, 2, 3, 4].divideItems(0, predicate: (e) => e.isEven).map((e) => e.toString()).join();
+      final result = [1, 2, 3, 4]
+          .divideItems(0, predicate: (e) => e.isEven)
+          .map((e) => e.toString())
+          .join();
       expect(result, '1234');
     });
 
