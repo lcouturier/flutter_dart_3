@@ -1,3 +1,5 @@
+import 'dart:math';
+
 extension ExtensionString on String {
   String removeDigits() => replaceAll(RegExp(r'\d'), '');
   String removeNonDigits() => replaceAll(RegExp(r'\D'), '');
@@ -5,7 +7,8 @@ extension ExtensionString on String {
   String removeLetters() => replaceAll(RegExp(r'[a-zA-Z]'), '');
   String removeNonLetters() => replaceAll(RegExp(r'[^a-zA-Z]'), '');
   String removeSymbols() => replaceAll(RegExp(r'[!@#$%^&*(),.?":{}|<>]'), '');
-  String removeNonSymbols() => replaceAll(RegExp(r'[^!@#$%^&*(),.?":{}|<>]'), '');
+  String removeNonSymbols() =>
+      replaceAll(RegExp(r'[^!@#$%^&*(),.?":{}|<>]'), '');
   String left(int size) {
     assert(size >= 0);
     return switch ((size, this)) {
@@ -42,19 +45,33 @@ extension ExtensionString on String {
 
   String get reversed => _reverseString(this);
 
-  static String _reverseString(String input) => input.isEmpty ? '' : _reverseString(input.tail) + input.head;
+  static String _reverseString(String input) =>
+      input.isEmpty ? '' : _reverseString(input.tail) + input.head;
 
-  String plus({Object? element}) => padRight(length + 1, element?.toString() ?? '');
+  String plus({Object? element}) =>
+      padRight(length + 1, element?.toString() ?? '');
 
   String operator <<(String? other) => this + (other ?? '');
 
   String get removeDiacritics {
-    var withDiacritics = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
-    var withoutDiacritics = 'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
+    var withDiacritics =
+        'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
+    var withoutDiacritics =
+        'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
 
     return splitMapJoin('',
-        onNonMatch: (char) =>
-            char.isNotEmpty && withDiacritics.contains(char) ? withoutDiacritics[withDiacritics.indexOf(char)] : char);
+        onNonMatch: (char) => char.isNotEmpty && withDiacritics.contains(char)
+            ? withoutDiacritics[withDiacritics.indexOf(char)]
+            : char);
+  }
+
+  String get shuffled => _shuffledString(this);
+
+  static String _shuffledString(String value) {
+    final random = Random();
+    final characters = value.split('');
+    final shuffled = characters..shuffle(random);
+    return shuffled.join();
   }
 }
 
