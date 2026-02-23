@@ -1,12 +1,12 @@
-class RangeIterator implements Iterator<int> {
-  int _current;
-  final int _end;
-  final int _step;
+class RangeIterator implements Iterator<num> {
+  num _current;
+  final num _end;
+  final num _step;
 
-  RangeIterator(int start, this._end, this._step) : _current = start - _step;
+  RangeIterator(num start, this._end, this._step) : _current = start - _step;
 
   @override
-  int get current => _current;
+  num get current => _current;
 
   @override
   bool moveNext() {
@@ -15,17 +15,17 @@ class RangeIterator implements Iterator<int> {
   }
 }
 
-class RangeIterable extends Iterable<int> {
-  final int start;
-  final int end;
-  final int step;
+class RangeIterable extends Iterable<num> {
+  final num start;
+  final num end;
+  final num step;
 
   RangeIterable(this.start, this.end, this.step);
 
   @override
-  Iterator<int> get iterator => RangeIterator(start, end, step);
+  Iterator<num> get iterator => RangeIterator(start, end, step);
 
-  Iterable<int> stepBy(int n) {
+  Iterable<num> stepBy(int n) {
     if (n <= 0) {
       throw ArgumentError('step must be > 0');
     }
@@ -37,7 +37,7 @@ class RangeIterable extends Iterable<int> {
   }
 }
 
-extension IntRange on int {
+extension IntRange on num {
   RangeIterable rangeTo(int end) {
     final step = this <= end ? 1 : -1;
     return RangeIterable(this, end, step);
