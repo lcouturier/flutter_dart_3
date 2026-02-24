@@ -1,13 +1,15 @@
-class PairwiseIterator<T> implements Iterator<({T left, T right})> {
+typedef PairResult<T> = ({T left, T right});
+
+class PairwiseIterator<T> implements Iterator<PairResult<T>> {
   final Iterator<T> _iterator;
   T? _previous;
 
-  ({T left, T right})? _current;
+  PairResult<T>? _current;
 
   PairwiseIterator(Iterator<T> items) : _iterator = items;
 
   @override
-  ({T left, T right}) get current => _current!;
+  PairResult<T> get current => _current!;
 
   @override
   bool moveNext() {
@@ -26,11 +28,11 @@ class PairwiseIterator<T> implements Iterator<({T left, T right})> {
   }
 }
 
-class PairwiseIterable<T> extends Iterable<({T left, T right})> {
+class PairwiseIterable<T> extends Iterable<PairResult<T>> {
   final Iterable<T> items;
   PairwiseIterable(this.items);
   @override
-  Iterator<({T left, T right})> get iterator => PairwiseIterator(items.iterator);
+  Iterator<PairResult<T>> get iterator => PairwiseIterator(items.iterator);
 }
 
 extension PairwiseExtension<T> on Iterable<T> {
@@ -47,5 +49,5 @@ extension PairwiseExtension<T> on Iterable<T> {
   /// // 2 -> 3
   /// // 3 -> 4
   /// ```
-  Iterable<({T left, T right})> pairwise() => PairwiseIterable(this);
+  Iterable<PairResult<T>> pairwise() => PairwiseIterable(this);
 }
