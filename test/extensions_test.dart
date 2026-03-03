@@ -82,29 +82,6 @@ void main() {
     });
   });
 
-  group('separatedBy', () {
-    test('test numbers', () {
-      final items = 1.unFold((e) => e + 1).take(5).toList();
-      final result = items.separatedBy(0).toList();
-      expect(result.length, 9);
-    });
-
-    test('test strings', () {
-      final result = ['a', 'b', 'c'].separatedBy('x').join();
-      expect(result, 'axbxc');
-    });
-
-    test('test empty', () {
-      final result = [].separatedBy('x').join();
-      expect(result, '');
-    });
-
-    test('test one element', () {
-      final result = ['A'].separatedBy('x').join();
-      expect(result, 'A');
-    });
-  });
-
   group('sum', () {
     test('test sum2', () {
       final items = 1.unFold((e) => e + 1).take(10).toList();

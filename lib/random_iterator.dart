@@ -28,3 +28,7 @@ class RandomIterable extends Iterable<int> {
   @override
   Iterator<int> get iterator => RandomIterator.withMax(max);
 }
+
+extension RandomExtension on int {
+  Iterable<int> get random => RandomIterable(this);
+}

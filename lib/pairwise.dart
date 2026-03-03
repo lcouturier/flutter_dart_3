@@ -50,4 +50,29 @@ extension PairwiseExtension<T> on Iterable<T> {
   /// // 3 -> 4
   /// ```
   Iterable<PairResult<T>> pairwise() => PairwiseIterable(this);
+
+  /// Returns an iterable of consecutive pairs from the input iterable.
+  ///
+  /// Example:
+  /// ```dart
+  /// final list = [1, 2, 3, 4];
+  /// for (final (left, right) in list.pairwise2()) {
+  ///   print('$left -> $right');
+  /// }
+  /// // Output:
+  /// // 1 -> 2
+  /// // 2 -> 3
+  /// // 3 -> 4
+  /// ```
+  Iterable<PairResult<T>> pairwise2() sync* {
+    T? previous;
+    for (final item in this) {
+      if (previous == null) {
+        previous = item;
+      } else {
+        yield (left: previous as T, right: item);
+        previous = item;
+      }
+    }
+  }
 }

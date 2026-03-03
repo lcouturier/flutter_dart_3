@@ -37,29 +37,6 @@ extension IterableExtensions<T> on Iterable<T> {
     return sum;
   }
 
-  //int countBy(bool Function(T) predicate) => where(predicate).length;
-
-  /// Adds a separator between each element of the sequence.
-  Iterable<T> separatedBy(T separator) sync* {
-    bool first = true;
-    for (var element in this) {
-      if (!first) {
-        yield separator;
-      }
-      yield element;
-      first = false;
-    }
-  }
-
-  /// Adds a separator between each element of the sequence.
-  ///
-  /// ```dart
-  /// final list = [1, 2, 3, 4, 5];
-  /// final result = list << 0;
-  /// expect(result, [1, 0, 2, 0, 3, 0, 4, 0, 5]);
-  /// ```
-  Iterable<T> operator <<(T separator) => separatedBy(separator);
-
   Iterable<T> divideItems(T divider, {bool Function(T) predicate = _defaultPredicate}) {
     // Prevent from using prev.last in fold, which creates exponential recursion.
     T? lastItem;
