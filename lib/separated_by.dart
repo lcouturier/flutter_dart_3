@@ -1,3 +1,5 @@
+import 'package:flutter_dart_3/pairwise.dart';
+
 extension UltraLazySeparator<T> on Iterable<T> {
   Iterable<T> separatedBy(T separator, {bool Function(T)? predicate}) sync* {
     T? previous;
@@ -25,6 +27,27 @@ extension UltraLazySeparator<T> on Iterable<T> {
       yield element;
       previous = element;
     }
+  }
+
+  Iterable<T> separatedBy3(T separator, [bool Function(T)? predicate]) sync* {
+    final p = predicate ?? (_) => true;
+    yield* pairwise().expand((e) => [e.left, if (p(e.left) && p(e.right)) separator]).followedBy([last]);
+  }
+
+  Iterable<T> separatedBy4(T separator, [bool Function(T)? predicate]) sync* {
+    final p = predicate ?? (_) => true;
+
+    bool hasValue = false;
+    late T last;
+    for (var element in pairwise()) {
+      hasValue = true;
+      yield element.left;
+      if (p(element.left) && p(element.right)) {
+        yield separator;
+      }
+      last = element.right;
+    }
+    if (hasValue) yield last;
   }
 
   /// Accumulates values using a binary operation

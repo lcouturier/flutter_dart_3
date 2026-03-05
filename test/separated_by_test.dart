@@ -51,4 +51,21 @@ void main() {
     // ignore: avoid_print
     print(result);
   });
+
+  group('separatedBy pairwise implémentation', () {
+    test('separatedBy 3', () {
+      final result = [1, 2, 3, 4, 5].separatedBy4(0).join();
+      expect(result, '102030405');
+    });
+
+    test('separatedBy 3 with predicate', () {
+      final result = [1, 2, 3, 4, 5].separatedBy4(0, (e) => e != 2).join();
+      expect(result, '1230405');
+    });
+
+    test('separatedBy empty', () {
+      final result = <int>[].separatedBy4(0).join();
+      expect(result, '');
+    });
+  });
 }
