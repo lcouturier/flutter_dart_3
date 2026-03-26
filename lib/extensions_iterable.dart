@@ -202,6 +202,26 @@ extension ExtendedList<E> on List<E> {
   List<E> operator +(List<E> other) {
     return [...this, ...other];
   }
+
+  /// Shifts the last element to the first position
+  /// ```dart
+  /// final list = [1, 2, 3, 4, 5];
+  /// list.shiftRight();
+  /// expect(list, [5, 1, 2, 3, 4]);
+  /// ```
+  List<E> shiftRight() {
+    if (isEmpty) return this;
+
+    final result = List.of(this);
+    final lastElement = result[result.length - 1];
+
+    for (var i = length - 1; i > 0; i--) {
+      result[i] = result[i - 1];
+    }
+
+    result[0] = lastElement;
+    return result;
+  }
 }
 
 // extension IntRange on int {
