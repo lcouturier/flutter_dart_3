@@ -48,6 +48,24 @@ void main() {
         print(v.toString());
       }
     });
+
+    test('iterate fibanacci', () {
+      final result = (0, 1)
+          .iterate((e) => (e.$2, e.$1 + e.$2))
+          .take(10)
+          .map((e) => e.$1)
+          .toList();
+      print(result);
+    });
+
+    test('generate fibanacci', () {
+      final result = (0, 1)
+          .generate((e) => (e.$2, e.$1 + e.$2))
+          .take(10)
+          .map((e) => e.$1)
+          .toList();
+      print(result);
+    });
   });
 
   group('factorial', () {

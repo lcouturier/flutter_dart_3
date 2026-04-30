@@ -36,5 +36,6 @@ extension ScanExtension<T> on Iterable<T> {
   /// returns an iterable
   /// example: [1,2,3].scan(0, (a, b) => a + b)
   /// returns [0, 1, 3, 6]
-  Iterable<T> scan(T initial, T Function(T, T) operation) => ScanIterable(initial, this, operation);
+  Iterable<T> scan(T initial, T Function(T, T) operation) =>
+      ScanIterable(initial, this, operation);
 }

@@ -32,4 +32,12 @@ class UnfoldIterable<T> extends Iterable<T> {
 extension Unfold<T> on T {
   /// Unfolds an iterable from a seed value and a function
   Iterable<T> iterate(T Function(T) f) => UnfoldIterable(this, f);
+
+  Iterable<T> generate(T Function(T) operation) sync* {
+    T next = this;
+    while (true) {
+      yield next;
+      next = operation(next);
+    }
+  }
 }

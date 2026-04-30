@@ -1,12 +1,31 @@
 // ignore_for_file: avoid_print
 
 import 'package:collection/collection.dart';
+import 'package:flutter_dart_3/distinct_by.dart';
 import 'package:flutter_dart_3/extensions.dart';
 import 'package:flutter_dart_3/extensions_iterable.dart';
 import 'package:flutter_dart_3/extensions_string.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+class Person {
+  final String name;
+  final int age;
+
+  Person(this.name, this.age);
+}
+
 void main() {
+  group('groupBy', () {
+    test('test groupBy numbers', () {
+      final items = [1, 2, 3, 4, 5];
+      final result = items.groupBy(key: (e) => e % 2);
+      expect(result, {
+        0: [2, 4],
+        1: [1, 3, 5]
+      });
+    });
+  });
+
   group('fold', () {
     final items = [
       (
@@ -38,9 +57,13 @@ void main() {
 
     test('test fold', () {
       final result = items.fold(false, (acc, e) {
-        bool hasOnlySeatMap = !e.segmentPlacement.hasMultipleChoices && e.segmentPlacement.seatMapPlacement != null;
-        bool isLastAvailableSeatInComfortSpace = e.preferencePlacement.lastAvailableSeatComfortSpaceBlock != null;
-        return acc ? acc : !(hasOnlySeatMap || isLastAvailableSeatInComfortSpace);
+        bool hasOnlySeatMap = !e.segmentPlacement.hasMultipleChoices &&
+            e.segmentPlacement.seatMapPlacement != null;
+        bool isLastAvailableSeatInComfortSpace =
+            e.preferencePlacement.lastAvailableSeatComfortSpaceBlock != null;
+        return acc
+            ? acc
+            : !(hasOnlySeatMap || isLastAvailableSeatInComfortSpace);
       });
 
       expect(result, true);
@@ -49,10 +72,14 @@ void main() {
     test('test any', () {
       final result = items
           .map((e) => (
-                hasOnlySeatMap: !e.segmentPlacement.hasMultipleChoices && e.segmentPlacement.seatMapPlacement != null,
-                isLastAvailableSeatInComfortSpace: e.preferencePlacement.lastAvailableSeatComfortSpaceBlock != null
+                hasOnlySeatMap: !e.segmentPlacement.hasMultipleChoices &&
+                    e.segmentPlacement.seatMapPlacement != null,
+                isLastAvailableSeatInComfortSpace:
+                    e.preferencePlacement.lastAvailableSeatComfortSpaceBlock !=
+                        null
               ))
-          .any((e) => !(e.hasOnlySeatMap || e.isLastAvailableSeatInComfortSpace));
+          .any((e) =>
+              !(e.hasOnlySeatMap || e.isLastAvailableSeatInComfortSpace));
 
       expect(result, true);
     });
@@ -210,7 +237,8 @@ void main() {
         (name: "Amin", roles: ["Guest", "Reseption"]),
         (name: "Nima", roles: ["Nurse", "Guest"]),
       ];
-      final result = users.selectMany((user) => user.roles, (user, role) => (user.name, role));
+      final result = users.selectMany(
+          (user) => user.roles, (user, role) => (user.name, role));
       expect(result, [
         ('Reza', 'Superadmin'),
         ('Amin', 'Guest'),
@@ -226,7 +254,8 @@ void main() {
         (name: "Amin", roles: ["Guest", "Reseption"]),
         (name: "Nima", roles: ["Nurse"]),
       ];
-      final result = users.selectMany((user) => user.roles, (user, role) => (user.name, role));
+      final result = users.selectMany(
+          (user) => user.roles, (user, role) => (user.name, role));
       expect(result, [
         ('Reza', 'Superadmin'),
         ('Amin', 'Guest'),
@@ -241,7 +270,8 @@ void main() {
         (name: "Amin", roles: <String>["Guest", "Reseption"]),
         (name: "Nima", roles: <String>[]),
       ];
-      final result = users.selectMany((user) => user.roles, (user, role) => (user.name, role));
+      final result = users.selectMany(
+          (user) => user.roles, (user, role) => (user.name, role));
       expect(result, [
         ('Reza', 'Superadmin'),
         ('Amin', 'Guest'),
@@ -260,7 +290,10 @@ void main() {
 
       var roles = ['Guest'];
 
-      final result = users.joinWhere(roles, (user, role) => user.roles.contains(role), (user, role) => (user.name));
+      final result = users.joinWhere(
+          roles,
+          (user, role) => user.roles.contains(role),
+          (user, role) => (user.name));
       expect(result, [
         'Amin',
         'Nima',
@@ -276,7 +309,8 @@ void main() {
 
       var roles = ['Guest'];
 
-      final result = users.joinWhere(roles, (user, role) => user.roles.contains(role));
+      final result =
+          users.joinWhere(roles, (user, role) => user.roles.contains(role));
       print(result);
 
       /// TODO: fix this
@@ -312,7 +346,13 @@ void main() {
     test('first', () {
       final first = [
         (id: 1, selectedAdditional: [(code: 'FOLDED_BIKE', quantity: 1)]),
-        (id: 2, selectedAdditional: [(code: 'FOLDED_BIKE', quantity: 1), (code: 'HEAVELY_LUGGAGE', quantity: 1)]),
+        (
+          id: 2,
+          selectedAdditional: [
+            (code: 'FOLDED_BIKE', quantity: 1),
+            (code: 'HEAVELY_LUGGAGE', quantity: 1)
+          ]
+        ),
       ];
 
       final second = [
@@ -320,9 +360,14 @@ void main() {
       ];
 
       final result = [
-        ...first.expand((e) => e.selectedAdditional.map((s) => (key: e.id, value: s))),
-        ...second.expand((e) => e.selectedAdditional.map((s) => (key: e.id, value: s)))
-      ].groupListsBy((e) => e.key).entries.map((e) => (id: e.key, selectedAdditionalServices: e.value));
+        ...first.expand(
+            (e) => e.selectedAdditional.map((s) => (key: e.id, value: s))),
+        ...second.expand(
+            (e) => e.selectedAdditional.map((s) => (key: e.id, value: s)))
+      ]
+          .groupListsBy((e) => e.key)
+          .entries
+          .map((e) => (id: e.key, selectedAdditionalServices: e.value));
 
       expect(result.countBy((e) => e.id == 1), 1);
     });
@@ -353,7 +398,8 @@ void main() {
         (DateTime(2024, 5, 7), 200),
       ];
 
-      final result = items.toMap(key: (item) => item.$1, value: (item) => item.map((e) => e.$2));
+      final result = items.toMap(
+          key: (item) => item.$1, value: (item) => item.map((e) => e.$2));
 
       print(result);
     });
@@ -444,13 +490,17 @@ void main() {
   group('mapWhen', () {
     test('test mapWhen 1', () {
       final items = generateSequence(0, (e) => e + 1).take(10);
-      final result = items.mapWhen(predicate: (e) => e % 2 == 0, replacement: (e) => 0).toList();
+      final result = items
+          .mapWhen(predicate: (e) => e % 2 == 0, replacement: (e) => 0)
+          .toList();
       expect(result.sum, 25);
     });
 
     test('test mapWhen 2', () {
       final items = generateSequence(0, (e) => e + 1).take(10);
-      final result = items.mapWhen(predicate: (e) => e % 2 == 0, replacement: (e) => 0).toList();
+      final result = items
+          .mapWhen(predicate: (e) => e % 2 == 0, replacement: (e) => 0)
+          .toList();
       expect(result.sum, 25);
     });
   });
@@ -538,12 +588,18 @@ void main() {
 
   group('removeDiacritics', () {
     test('test 1', () {
-      final result = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž'.removeDiacritics;
-      expect(result, 'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz');
+      final result =
+          'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž'
+              .removeDiacritics;
+      expect(result,
+          'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz');
     });
     test('test 2', () {
-      final result = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž'.removeDiacritics;
-      expect(result, 'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz');
+      final result =
+          'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž'
+              .removeDiacritics;
+      expect(result,
+          'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz');
     });
 
     test('test 3', () {
@@ -556,17 +612,24 @@ void main() {
     final days = ['THURSDAY', 'FRIDAY'];
 
     test('test mapNotNull', () {
-      final result =
-          days.mapNotNull((day) => FavoriteItineraryAlertPlanningDays.values.firstWhereOrNull((e) => e.name == day));
+      final result = days.mapNotNull((day) => FavoriteItineraryAlertPlanningDays
+          .values
+          .firstWhereOrNull((e) => e.name == day));
       print(result);
-      expect(result, [FavoriteItineraryAlertPlanningDays.THURSDAY, FavoriteItineraryAlertPlanningDays.FRIDAY]);
+      expect(result, [
+        FavoriteItineraryAlertPlanningDays.THURSDAY,
+        FavoriteItineraryAlertPlanningDays.FRIDAY
+      ]);
     });
 
     test('test joinWhere', () {
-      final result =
-          days.joinWhere(FavoriteItineraryAlertPlanningDays.values, (day, e) => e.name == day, (day, e) => e);
+      final result = days.joinWhere(FavoriteItineraryAlertPlanningDays.values,
+          (day, e) => e.name == day, (day, e) => e);
       print(result);
-      expect(result, [FavoriteItineraryAlertPlanningDays.THURSDAY, FavoriteItineraryAlertPlanningDays.FRIDAY]);
+      expect(result, [
+        FavoriteItineraryAlertPlanningDays.THURSDAY,
+        FavoriteItineraryAlertPlanningDays.FRIDAY
+      ]);
     });
 
     test('test joinWhere', () {

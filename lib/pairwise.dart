@@ -1,12 +1,12 @@
 typedef PairResult<T> = ({T left, T right});
 
 class PairwiseIterator<T> implements Iterator<PairResult<T>> {
-  final Iterator<T> _iterator;
+  final Iterator<T> _items;
   T? _previous;
 
   PairResult<T>? _current;
 
-  PairwiseIterator(Iterator<T> items) : _iterator = items;
+  PairwiseIterator(Iterator<T> items) : _items = items;
 
   @override
   PairResult<T> get current => _current!;
@@ -14,13 +14,13 @@ class PairwiseIterator<T> implements Iterator<PairResult<T>> {
   @override
   bool moveNext() {
     if (_previous == null) {
-      if (!_iterator.moveNext()) return false;
-      _previous = _iterator.current;
+      if (!_items.moveNext()) return false;
+      _previous = _items.current;
     }
 
-    if (!_iterator.moveNext()) return false;
+    if (!_items.moveNext()) return false;
 
-    final next = _iterator.current;
+    final next = _items.current;
     _current = (left: _previous as T, right: next);
     _previous = next;
 
