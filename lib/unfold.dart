@@ -30,14 +30,20 @@ class UnfoldIterable<T> extends Iterable<T> {
 }
 
 extension Unfold<T> on T {
-  /// Unfolds an iterable from a seed value and a function
-  Iterable<T> iterate(T Function(T) f) => UnfoldIterable(this, f);
+  // Iterable<T> iterate(T Function(T) f) => UnfoldIterable(this, f);
 
-  Iterable<T> generate(T Function(T) operation) sync* {
-    T next = this;
+  /// Follows a sequence by applying a function to the current value
+  ///
+  /// Example:
+  /// ```
+  /// final result = 1.followWith((x) => x + 1).take(10).toList();
+  /// expect(result, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  /// ```
+  Iterable<T> followWith(T Function(T) operation) sync* {
+    T current = this;
     while (true) {
-      yield next;
-      next = operation(next);
+      yield current;
+      current = operation(current);
     }
   }
 }

@@ -7,18 +7,18 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('unfold', () {
     test('iterate int', () {
-      final result = 1.iterate((x) => x + 1).take(10).toList();
+      final result = 1.followWith((x) => x + 1).take(10).toList();
       expect(result, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     });
 
     test('iterate string', () {
-      final result = "a".iterate((x) => '${x}a').take(10).join();
+      final result = "a".followWith((x) => '${x}a').take(10).join();
       expect(result, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     });
 
     test('iterate DateTime', () {
       final result = DateTime(2020)
-          .iterate((x) => x.add(const Duration(days: 1)))
+          .followWith((x) => x.add(const Duration(days: 1)))
           .take(10)
           .toList();
       expect(result, [
@@ -38,20 +38,21 @@ void main() {
     });
 
     test('iterate fibonacci', () {
-      for (final v in (0, 1).iterate((e) => (e.$2, e.$1 + e.$2)).take(10)) {
+      for (final v in (0, 1).followWith((e) => (e.$2, e.$1 + e.$2)).take(10)) {
         print(v.toString());
       }
     });
 
     test('iterate factorial', () {
-      for (final v in (1, 1).iterate((e) => (e.$1 * e.$2, e.$2 + 1)).take(10)) {
+      for (final v
+          in (1, 1).followWith((e) => (e.$1 * e.$2, e.$2 + 1)).take(10)) {
         print(v.toString());
       }
     });
 
     test('iterate fibanacci', () {
       final result = (0, 1)
-          .iterate((e) => (e.$2, e.$1 + e.$2))
+          .followWith((e) => (e.$2, e.$1 + e.$2))
           .take(10)
           .map((e) => e.$1)
           .toList();
@@ -60,7 +61,7 @@ void main() {
 
     test('generate fibanacci', () {
       final result = (0, 1)
-          .generate((e) => (e.$2, e.$1 + e.$2))
+          .followWith((e) => (e.$2, e.$1 + e.$2))
           .take(10)
           .map((e) => e.$1)
           .toList();

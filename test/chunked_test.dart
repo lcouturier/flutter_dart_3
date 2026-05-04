@@ -43,7 +43,7 @@ void main() {
   });
 
   test('chunked with size larger than list', () {
-    final result = 1.iterate((x) => x + 1).chunked(5).take(3);
+    final result = 1.followWith((x) => x + 1).chunked(5).take(3);
     expect(result, [
       [1, 2, 3, 4, 5],
       [6, 7, 8, 9, 10],
