@@ -3,6 +3,30 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('expect', () {
+    test('expect with integers 1', () {
+      final left = [1, 2, 3, 4, 5];
+      final right = [2, 4];
+
+      final result = left.expect(right).toList();
+
+      expect(result, [1, 3, 5]);
+    });
+
+    test('expect with integers 2', () {
+      final left = [1, 2, 3, 4, 5];
+      final right = [2, 4];
+
+      final result = left
+          .expect(
+            right,
+            leftKey: (l) => l,
+            rightKey: (r) => r,
+          )
+          .toList();
+
+      expect(result, [1, 3, 5]);
+    });
+
     test('expect', () {
       final left = [
         {'id': 1, 'name': 'Alice'},
@@ -18,8 +42,8 @@ void main() {
       final result = left
           .expect(
             right,
-            (l) => l['id'],
-            (r) => r['id'],
+            leftKey: (l) => l['id'],
+            rightKey: (r) => r['id'],
           )
           .toList();
 
