@@ -7,7 +7,7 @@ void main() {
       final left = [1, 2, 3, 4, 5];
       final right = [2, 4];
 
-      final result = left.expect(right).toList();
+      final result = left.without(right).toList();
 
       expect(result, [1, 3, 5]);
     });
@@ -17,7 +17,7 @@ void main() {
       final right = [2, 4];
 
       final result = left
-          .expect(
+          .without(
             right,
             leftKey: (l) => l,
             rightKey: (r) => r,
@@ -40,7 +40,7 @@ void main() {
       ];
 
       final result = left
-          .expect(
+          .without(
             right,
             leftKey: (l) => l['id'],
             rightKey: (r) => r['id'],

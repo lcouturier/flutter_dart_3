@@ -7,9 +7,9 @@ extension ExpectExtensions<L, R, K> on Iterable<L> {
   /// ```dart
   /// final left = [1, 2, 3, 4, 5];
   /// final right = [2, 4];
-  /// final result = left.expect(right).toList(); // result will be [1, 3, 5]
+  /// final result = left.without(right).toList(); // result will be [1, 3, 5]
   /// ```
-  Iterable<L> expect(Iterable<R> right,
+  Iterable<L> without(Iterable<R> right,
       {K Function(L)? leftKey, K Function(R)? rightKey}) sync* {
     final lk = leftKey ?? (l) => l as K;
     final rk = rightKey ?? (r) => r as K;
