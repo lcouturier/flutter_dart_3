@@ -1,6 +1,19 @@
 import 'package:flutter_dart_3/pairwise.dart';
 
 extension UltraLazySeparator<T> on Iterable<T> {
+  Iterable<T> usualSeparatedBy(T separator,
+      {bool Function(T)? predicate}) sync* {
+    final p = predicate ?? (_) => true;
+    bool first = true;
+    for (var element in this) {
+      if (!first && p(element)) {
+        yield separator;
+      }
+      yield element;
+      first = false;
+    }
+  }
+
   Iterable<T> separatedBy(T separator, {bool Function(T)? predicate}) sync* {
     T? previous;
     final p = predicate ?? (_) => true;
@@ -11,7 +24,9 @@ extension UltraLazySeparator<T> on Iterable<T> {
     yield iterator.current;
     previous = iterator.current;
     while (iterator.moveNext()) {
-      if ((previous != null) && (p(previous)) && (p(iterator.current))) yield separator;
+      if ((previous != null) && (p(previous)) && (p(iterator.current))) {
+        yield separator;
+      }
       yield iterator.current;
       previous = iterator.current;
     }
@@ -31,7 +46,9 @@ extension UltraLazySeparator<T> on Iterable<T> {
 
   Iterable<T> separatedBy3(T separator, [bool Function(T)? predicate]) sync* {
     final p = predicate ?? (_) => true;
-    yield* pairwise().expand((e) => [e.left, if (p(e.left) && p(e.right)) separator]).followedBy([last]);
+    yield* pairwise()
+        .expand((e) => [e.left, if (p(e.left) && p(e.right)) separator])
+        .followedBy([last]);
   }
 
   Iterable<T> separatedBy4(T separator, [bool Function(T)? predicate]) sync* {
