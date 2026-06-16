@@ -17,9 +17,11 @@ extension IterableIntExtensions on Iterable<num> {
     return _sum(items.tail) + items.head;
   }
 
-  num _sum2(Iterable<num> items, [num acc = 0]) => items.isEmpty ? acc : _sum2(items.tail, items.head + acc);
+  num _sum2(Iterable<num> items, [num acc = 0]) =>
+      items.isEmpty ? acc : _sum2(items.tail, items.head + acc);
 
-  ({num result, int elapsed}) Function(Iterable<num>) get _sumCached => _sum.cache().measure();
+  ({num result, int elapsed}) Function(Iterable<num>) get _sumCached =>
+      _sum.cache().measure();
 
   ({num result, int elapsed}) get sum => _sumCached(this);
   num get sum2 => _sum2(this);
@@ -37,7 +39,8 @@ extension IterableExtensions<T> on Iterable<T> {
     return sum;
   }
 
-  Iterable<T> divideItems(T divider, {bool Function(T) predicate = _defaultPredicate}) {
+  Iterable<T> divideItems(T divider,
+      {bool Function(T) predicate = _defaultPredicate}) {
     // Prevent from using prev.last in fold, which creates exponential recursion.
     T? lastItem;
 
@@ -45,7 +48,8 @@ extension IterableExtensions<T> on Iterable<T> {
       yield* prev;
 
       final listItemSafe = lastItem;
-      if (listItemSafe != null && predicate(listItemSafe) && predicate(cur)) yield divider;
+      if (listItemSafe != null && predicate(listItemSafe) && predicate(cur))
+        yield divider;
       lastItem = cur;
 
       yield cur;
@@ -86,29 +90,37 @@ extension IterableExtensions<T> on Iterable<T> {
   ///   ('Nima', 'Guest'),
   /// ]);
   /// ```
-  Iterable<R> selectMany<R, S>(Iterable<S> Function(T) collectionSelector, R Function(T, S) resultSelector) {
-    return expand((e) => collectionSelector(e).map((t) => resultSelector(e, t)));
+  Iterable<R> selectMany<R, S>(Iterable<S> Function(T) collectionSelector,
+      R Function(T, S) resultSelector) {
+    return expand(
+        (e) => collectionSelector(e).map((t) => resultSelector(e, t)));
   }
 
-  Iterable<R> joinWhere<S, R>(Iterable<S> others, bool Function(T, S) test, [R Function(T, S)? resultSelector]) {
+  Iterable<R> joinWhere<S, R>(Iterable<S> others, bool Function(T, S) test,
+      [R Function(T, S)? resultSelector]) {
     final selector = resultSelector ?? (x, y) => (x, y) as R;
 
-    return expand((x) => others.where((y) => test(x, y)).map((y) => selector(x, y)));
+    return expand(
+        (x) => others.where((y) => test(x, y)).map((y) => selector(x, y)));
   }
 
   /// A left join on two iterables. The result will contain all elements of the
   /// first iterable and the matching elements of the second iterable.
   /// If no match is found, a null value is used.
-  Iterable<R> leftJoinWhere<S, R>(Iterable<S> others, bool Function(T, S) test, [R Function(T, S?)? resultSelector]) {
+  Iterable<R> leftJoinWhere<S, R>(Iterable<S> others, bool Function(T, S) test,
+      [R Function(T, S?)? resultSelector]) {
     final selector = resultSelector ?? (x, y) => (x, y) as R;
 
     return map((x) {
       var matches = others.where((y) => test(x, y));
-      return matches.isEmpty ? [selector(x, null)] : matches.map((y) => selector(x, y));
+      return matches.isEmpty
+          ? [selector(x, null)]
+          : matches.map((y) => selector(x, y));
     }).expand((e) => e);
   }
 
-  Iterable<T> mapWhen({required Predicate predicate, required T Function(T) replacement}) {
+  Iterable<T> mapWhen(
+      {required Predicate predicate, required T Function(T) replacement}) {
     return map((e) => predicate(e) ? replacement(e) : e);
   }
 
@@ -139,7 +151,9 @@ extension IterableExtensions<T> on Iterable<T> {
   /// final result = list.toMap((e) => e, (e) => e * 2);
   /// expect(result, {1: 2, 2: 4, 3: 6, 4: 8, 5: 10});
   /// ```
-  Map<K, V> toMap<K, V>({required K Function(T element) key, V Function(List<T> element)? value}) {
+  Map<K, V> toMap<K, V>(
+      {required K Function(T element) key,
+      V Function(List<T> element)? value}) {
     final transform = value ?? (e) => e as V;
 
     var grouped = <K, List<T>>{};
@@ -163,7 +177,9 @@ extension IterableExtensions<T> on Iterable<T> {
   Map<K, int> countBy<K>(K Function(T element) mapKey) {
     return fold(
       {},
-      (previousValue, element) => previousValue + {mapKey(element): (previousValue[mapKey(element)] ?? 0) + 1},
+      (previousValue, element) =>
+          previousValue +
+          {mapKey(element): (previousValue[mapKey(element)] ?? 0) + 1},
     );
   }
 
@@ -173,6 +189,33 @@ extension IterableExtensions<T> on Iterable<T> {
       yield next;
       next = operation(next);
     }
+  }
+
+  /// Reduces the elements of this iterable to a single value by iteratively combining each element with an existing value.
+  /// If the iterable is empty, the [defaultValue] is returned.
+  ///
+  /// ```dart
+  /// final list = [1, 2, 3, 4];
+  /// final result = list.reduceOrDefault(0, (a, b) => a + b);
+  /// expect(result, 10);
+  ///
+  /// final emptyList = <int>[];
+  /// final result2 = emptyList.reduceOrDefault(0, (a, b) => a + b);
+  /// expect(result2, 0);
+  /// ```
+  T reduceOrDefault(T defaultValue, T Function(T, T) combine) {
+    final iterator = this.iterator;
+
+    if (!iterator.moveNext()) {
+      return defaultValue;
+    }
+
+    var result = iterator.current;
+    while (iterator.moveNext()) {
+      result = combine(result, iterator.current);
+    }
+
+    return result;
   }
 }
 
@@ -193,7 +236,8 @@ extension ExtendedList<E> on List<E> {
     }
   }
 
-  Iterable<R> expandIndexed<R>(Iterable<R> Function(int index, E element) expand) sync* {
+  Iterable<R> expandIndexed<R>(
+      Iterable<R> Function(int index, E element) expand) sync* {
     for (var index = 0; index < length; index++) {
       yield* expand(index, this[index]);
     }
