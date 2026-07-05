@@ -40,7 +40,9 @@ void main() {
     });
 
     test('letters with predicate', () {
-      final result = ['a', 'b', 'c', 'd', 'e'].divideItems('x', predicate: (e) => e != 'b').join();
+      final result = ['a', 'b', 'c', 'd', 'e']
+          .divideItems('x', predicate: (e) => e != 'b')
+          .join();
       expect(result, 'abcxdxe');
     });
 
@@ -55,17 +57,25 @@ void main() {
     });
 
     test('two letter with predicate', () {
-      final result = ['a', 'b', 'c', 'd', 'e'].divideItems('x', predicate: (e) => e != 'b').join();
+      final result = ['a', 'b', 'c', 'd', 'e']
+          .divideItems('x', predicate: (e) => e != 'b')
+          .join();
       expect(result, 'abcxdxe');
     });
 
     test('numbers', () {
-      final result = List.generate(10, (index) => index + 1).divideItems(0).map((e) => e.toString()).join();
+      final result = List.generate(10, (index) => index + 1)
+          .divideItems(0)
+          .map((e) => e.toString())
+          .join();
       expect(result, '10203040506070809010');
     });
 
     test('numbers with predicate', () {
-      final result = [1, 2, 3, 4].divideItems(0, predicate: (e) => e.isEven).map((e) => e.toString()).join();
+      final result = [1, 2, 3, 4]
+          .divideItems(0, predicate: (e) => e.isEven)
+          .map((e) => e.toString())
+          .join();
       expect(result, '1234');
     });
 
@@ -73,6 +83,85 @@ void main() {
       final list = ['1', '2'];
       final listDivided = list.divideItems('|').toList(); // => ['1','|','2']
       expect(listDivided, ['1', '|', '2']);
+    });
+  });
+
+  group('rotateRight', () {
+    test('test rotateRight with default positions', () {
+      final result = [1, 2, 3, 4, 5].rotateRight();
+      expect(result, [5, 1, 2, 3, 4]);
+    });
+
+    test('test rotateRight', () {
+      final result = [1, 2, 3, 4, 5].rotateRight(2);
+      expect(result, [4, 5, 1, 2, 3]);
+    });
+
+    test('test rotateRight with empty list', () {
+      final result = <int>[].rotateRight(2);
+      expect(result, []);
+    });
+
+    test('test rotateRight with positions greater than length', () {
+      final result = [1, 2, 3, 4, 5].rotateRight(7);
+      expect(result, [4, 5, 1, 2, 3]);
+    });
+
+    test('test rotateRight with positions equal to length', () {
+      final result = [1, 2, 3, 4, 5].rotateRight(5);
+      expect(result, [1, 2, 3, 4, 5]);
+    });
+
+    test('test rotateRight with negative positions', () {
+      final result = [1, 2, 3, 4, 5].rotateRight(-2);
+      expect(result, [3, 4, 5, 1, 2]);
+    });
+
+    test('test rotateRight with negative positions throws', () {
+      expect(() => [1, 2, 3, 4, 5].rotateRight(-2), throwsArgumentError);
+    });
+  });
+
+  group('rotateLeft', () {
+    test('test rotateLeft with default positions', () {
+      final result = [1, 2, 3, 4, 5].rotateLeft();
+      expect(result, [2, 3, 4, 5, 1]);
+    });
+
+    test('test rotateLeft', () {
+      final result = [1, 2, 3, 4, 5].rotateLeft(2);
+      expect(result, [3, 4, 5, 1, 2]);
+    });
+
+    test('test rotateLeft with empty list', () {
+      final result = <int>[].rotateLeft(2);
+      expect(result, []);
+    });
+
+    test('test rotateLeft with positions greater than length', () {
+      final result = [1, 2, 3, 4, 5].rotateLeft(7);
+      expect(result, [3, 4, 5, 1, 2]);
+    });
+
+    test('test rotateLeft with positions equal to length', () {
+      final result = [1, 2, 3, 4, 5].rotateLeft(5);
+      expect(result, [1, 2, 3, 4, 5]);
+    });
+
+    test('test rotateLeft with negative positions throws', () {
+      expect(() => [1, 2, 3, 4, 5].rotateLeft(-2), throwsArgumentError);
+    });
+  });
+
+  group('shiftRight', () {
+    test('test shiftRight', () {
+      final result = [1, 2, 3, 4, 5].shiftRight();
+      expect(result, [5, 1, 2, 3, 4]);
+    });
+
+    test('test shiftRight with empty list', () {
+      final result = <int>[].shiftRight();
+      expect(result, []);
     });
   });
 }

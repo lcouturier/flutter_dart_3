@@ -266,6 +266,31 @@ extension ExtendedList<E> on List<E> {
     result[0] = lastElement;
     return result;
   }
+
+  List<E> rotateRight([int positions = 1]) {
+    if (positions < 0) {
+      throw ArgumentError('Positions must be positive');
+    }
+    if (isEmpty || positions == 0) return List.of(this);
+
+    final effectivePositions = positions % length;
+    if (effectivePositions == 0) return List.of(this);
+
+    return sublist(length - effectivePositions) +
+        sublist(0, length - effectivePositions);
+  }
+
+  List<E> rotateLeft([int positions = 1]) {
+    if (positions < 0) {
+      throw ArgumentError('Positions must be positive');
+    }
+    if (isEmpty || positions == 0) return List.of(this);
+
+    final effectivePositions = positions % length;
+    if (effectivePositions == 0) return List.of(this);
+
+    return sublist(effectivePositions) + sublist(0, effectivePositions);
+  }
 }
 
 // extension IntRange on int {
