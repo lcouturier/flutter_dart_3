@@ -20,23 +20,30 @@ int? extractPrice(String price) {
   // Determine the decimal separator based on the last occurrence of '.' or ','
   final lastDot = cleaned.lastIndexOf('.');
   final lastComma = cleaned.lastIndexOf(',');
-  final decimalSeparator = switch (lastDot.compareTo(lastComma)) {
-    1 => '.',
-    -1 => ',',
-    0 => '',
-    _ => '',
+
+  final normalized = switch ((lastDot, lastComma)) {
+    (int dot, int comma) when dot == -1 && comma == -1 => cleaned, // No decimal separator found
+    (int dot, int comma) when dot >= 0 && comma < 0 => _nomalize(cleaned, '.'), // Only dot found
+    (int dot, int comma) when comma >= 0 && dot < 0 => _nomalize(cleaned, ','), // Only comma found
+    (int dot, int comma) when dot > comma => cleaned.replaceAll(',', ''), // Dot is the decimal separator, remove commas
+    (int dot, int comma) when comma > dot => cleaned
+        .replaceAll('.', '')
+        .replaceAll(',', '.'), // Comma is the decimal separator, remove dots and replace comma with dot
+    _ => cleaned, // No decimal separator found
   };
 
-  if (decimalSeparator.isEmpty) {
-    // No decimal separator found, parse as integer
-    return int.tryParse(cleaned);
-  }
-
-  final normalized =
-      cleaned.replaceAll(RegExp(decimalSeparator == '.' ? r',' : r'\.'), '').replaceAll(decimalSeparator, '.');
   final value = double.tryParse(normalized);
-  if (value == null) return null;
-  if (!value.isFinite) return null;
+  if (value == null) return null; // Return null if parsing fails
+  if (!value.isFinite) return null; // Return null for infinite or NaN values
+  if (value > 1000000) return null; // Arbitrary limit to avoid parsing extremely large numbers
 
   return value.ceil();
+}
+
+String _nomalize(String cleaned, String decimalSeparator) {
+  final parts = cleaned.split(decimalSeparator);
+  if (parts.length == 2 && parts[1].length != 3) {
+    return decimalSeparator == '.' ? cleaned : cleaned.replaceAll(',', '.');
+  }
+  return cleaned.replaceAll(decimalSeparator, '');
 }

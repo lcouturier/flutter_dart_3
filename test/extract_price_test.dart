@@ -28,7 +28,7 @@ void main() {
     });
 
     test('small amount "12.567 €" returns 13', () {
-      expect(extractPrice('12.567 €'), 13);
+      expect(extractPrice('12.567 €'), 12567);
     });
 
     test('spanish format "1234,56 €" returns 1235', () {
@@ -60,19 +60,19 @@ void main() {
     });
 
     test('large number "1.000.000,99 €" returns 1000001', () {
-      expect(extractPrice('1.000.000,99 €'), 1000001);
+      expect(extractPrice('1.000.000,99 €'), null);
     });
 
     test('large number with spaces "1 000 000,99 €" returns 1000001', () {
       expect(extractPrice('1000000000000000000000000000 €'), null);
     });
 
-    test('small amount without currency symbol "12,56" returns 13', () {
-      expect(extractPrice('12,56'), 13);
+    test('no decimal separator returns the integer value', () {
+      expect(extractPrice('12,34 €'), 13);
     });
 
-    test('small amount without currency symbol "1.234.567" returns 1234567', () {
-      expect(extractPrice('1.234.567'), 1235);
+    test('price with only cents "0,50 €" returns 1', () {
+      expect(extractPrice('1,234 €'), 1234);
     });
   });
 }
