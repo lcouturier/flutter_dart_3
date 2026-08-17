@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_redundant_argument_values
+
 import 'package:flutter_dart_3/datetime_extensions.dart';
 import 'package:flutter_dart_3/extensions.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,6 +9,11 @@ void main() {
     test('truncate minutes', () {
       final result = DateTime(2020, 1, 6, 13, 30).truncateTo(DateUnit.hour);
       expect(result, DateTime(2020, 1, 6, 13, 0));
+    });
+
+    test('truncate hours', () {
+      final result = DateTime(2020, 1, 6, 13, 30).truncateTo(DateUnit.day);
+      expect(result, DateTime(2020, 1, 6));
     });
 
     test('truncate days', () {

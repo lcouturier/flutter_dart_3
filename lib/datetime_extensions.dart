@@ -26,6 +26,13 @@ extension DateTimeExtensions on DateTime {
 
   /// Tronque la date jusqu'à l'unité spécifiée.
   /// Les unités inférieures sont réinitialisées à leur valeur minimale (1 ou 0).
+  /// <param name="unit">L'unité à laquelle tronquer la date.</param>
+  /// <returns>La date tronquée.</returns>
+  /// <example>
+  /// DateTime date = DateTime(2023, 5, 15, 10, 30, 45);
+  /// DateTime truncatedDate = date.truncateTo(DateUnit.day);
+  /// print(truncatedDate); // Affiche : 2023-05-15 00:00:00.000
+  /// </example>
   DateTime truncateTo(DateUnit unit) {
     final y = year;
     final m = unit.index >= DateUnit.month.index ? month : 1;
@@ -34,9 +41,7 @@ extension DateTimeExtensions on DateTime {
     final min = unit.index >= DateUnit.minute.index ? minute : 0;
     final s = unit.index >= DateUnit.second.index ? second : 0;
 
-    return isUtc
-        ? DateTime.utc(y, m, d, h, min, s)
-        : DateTime(y, m, d, h, min, s);
+    return isUtc ? DateTime.utc(y, m, d, h, min, s) : DateTime(y, m, d, h, min, s);
   }
 }
 
@@ -51,8 +56,7 @@ class DateTimeUtils {
     return ((daysInMonth + firstWeekday) / 7).ceil();
   }
 
-  static Map<int, int> Function(int args) getNumberOfWeeksByMonth =
-      _getNumberOfWeeksByMonthCore.cache();
+  static Map<int, int> Function(int args) getNumberOfWeeksByMonth = _getNumberOfWeeksByMonthCore.cache();
   static Map<int, int> _getNumberOfWeeksByMonthCore(int year) {
     final f = _getNumberOfWeeks.curry(year);
     return {for (int month = 0; month < 12; month++) month: f(month)};
