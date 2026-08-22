@@ -16,11 +16,7 @@ class LeftJoinIterator<L, R, K> implements Iterator<({L left, List<R> right})> {
     _rightIndex = {};
     for (final r in right) {
       final key = rightKey(r);
-      if (_rightIndex.containsKey(key)) {
-        _rightIndex[key]!.add(r);
-      } else {
-        _rightIndex[key] = [r];
-      }
+      _rightIndex.putIfAbsent(key, () => []).add(r);
     }
   }
 

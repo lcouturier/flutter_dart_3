@@ -51,10 +51,36 @@ class InnerJoinIterable<L, R, K> extends Iterable<({L left, R right})> {
   });
 
   @override
-  Iterator<({L left, R right})> get iterator => InnerJoinIterator(left, right, leftKey: leftKey, rightKey: rightKey);
+  Iterator<({L left, R right})> get iterator =>
+      InnerJoinIterator(left, right, leftKey: leftKey, rightKey: rightKey);
 }
 
 extension InnerJoinExtension<L> on Iterable<L> {
-  Iterable<({L left, R right})> innerJoin<R, K>(Iterable<R> other, K Function(L) leftKey, K Function(R) rightKey) =>
-      InnerJoinIterable<L, R, K>(left: this, right: other, leftKey: leftKey, rightKey: rightKey);
+  Iterable<({L left, R right})> innerJoin<R, K>(
+          Iterable<R> other, K Function(L) leftKey, K Function(R) rightKey) =>
+      InnerJoinIterable<L, R, K>(
+          left: this, right: other, leftKey: leftKey, rightKey: rightKey);
+}
+
+extension HashJoinExtension<L> on Iterable<L> {
+  Iterable<({L left, R right})> hashJoin<R, K>(
+      Iterable<R> other, K Function(L) leftKey, K Function(R) rightKey) sync* {
+    // Build a hash map of the right iterable based on the right key
+    final map = <K, List<R>>{};
+    for (final item in other) {
+      final k = rightKey(item);
+      map.putIfAbsent(k, () => []).add(item);
+    }
+
+    // Iterate over the left iterable and yield pairs for matching keys
+    for (var leftValue in this) {
+      final key = leftKey(leftValue);
+      final rightValue = map[key];
+      if (rightValue != null) {
+        for (var r in rightValue) {
+          yield (left: leftValue, right: r);
+        }
+      }
+    }
+  }
 }
